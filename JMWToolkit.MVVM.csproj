@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <PackageId>JMWToolkitMvvmDotNetHelpers</PackageId>
+    <Authors>jmwileydev@outlook.com</Authors>
+    <PackageProjectUrl>https://github.com/jmwileydev/JMWToolkit.MVVM</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/jmwileydev/JMWToolkit.MVVM</RepositoryUrl>
+    <SignAssembly>false</SignAssembly>
+    <Version>1.0.1</Version>
+    <Title>JMWToolkit Dot Net MVVM Helpers</Title>
+    <License>BSD-2-Clause</License>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Tags>C# Helpers MessageBoxEx IconHelper ComboBoxEx StringResourceHelpers ViewModelBase MVVM .Net</Tags>
+    <ReleaseNotes>
+      This is the initial checkin for the library. It contains some classes that will I will share amongst my
+      MVVM projects.
+
+      Fixing a couple of minor issues:
+      - ViewModelBase was not in the correct namespace
+      - Making ComboBoxEx a public class
+    </ReleaseNotes>
+    <Description>Helper classes for common tasks between my MVVM applications</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Copyright>2023</Copyright>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+    <None Include="LICENSE" Pack="true" PackagePath="" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+    <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+</Project>
