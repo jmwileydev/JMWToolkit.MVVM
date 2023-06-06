@@ -12,25 +12,34 @@ using System.Windows.Input;
 
 namespace JMWToolkit.MVVM.Controls;
 
-public class ComboBoxEx : ComboBox
+/// <summary>
+/// ComboBoxWithAdd - adds an optional button to the bottom of the ComboBox drop down so that the user can choose to
+/// add a new item into the list.
+/// </summary>
+public class ComboBoxWithAdd : ComboBox
 {
+    public ComboBoxWithAdd()
+    {
+        DefaultStyleKeyProperty.OverrideMetadata(typeof(ComboBoxWithAdd), new FrameworkPropertyMetadata(typeof(ComboBoxWithAdd)));
+    }
+
     public static readonly DependencyProperty AddNewItemCommandProperty =
             DependencyProperty.Register(
             "AddNewItemCommand",
             typeof(ICommand),
-            typeof(ComboBoxEx));
+            typeof(ComboBoxWithAdd));
 
     public static readonly DependencyProperty AddNewItemContentProperty =
             DependencyProperty.Register(
             "AddNewItemContent",
             typeof(String),
-            typeof(ComboBoxEx));
+            typeof(ComboBoxWithAdd));
 
     public static readonly DependencyProperty AddNewItemCommandParameterProperty =
             DependencyProperty.Register(
             "AddNewItemCommandParameter",
             typeof(Object),
-            typeof(ComboBoxEx));
+            typeof(ComboBoxWithAdd));
 
     public ICommand AddNewItemCommand
     {
@@ -44,7 +53,7 @@ public class ComboBoxEx : ComboBox
             SetValue(AddNewItemCommandProperty, value);
         }
     }
-        public Object AddNewItemCommandParameter
+    public Object AddNewItemCommandParameter
     {
         get
         {

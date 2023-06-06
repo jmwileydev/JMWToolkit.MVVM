@@ -17,6 +17,10 @@ using System.Windows.Media.Imaging;
 
 namespace JMWToolkit.MVVM.Dialogs;
 
+/// <summary>
+/// MessageBoxEx - does a better job of formatting the messages when they are long. It automatically
+/// adds in the line breaks where needed.
+/// </summary>
 public partial class MessageBoxEx : Window
 {
     private MessageBoxResult _result = MessageBoxResult.None;

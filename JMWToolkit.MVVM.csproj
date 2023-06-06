@@ -1,5 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net7.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
@@ -13,30 +12,28 @@
     <PackageProjectUrl>https://github.com/jmwileydev/JMWToolkit.MVVM</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jmwileydev/JMWToolkit.MVVM</RepositoryUrl>
     <SignAssembly>false</SignAssembly>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Title>JMWToolkit Dot Net MVVM Helpers</Title>
     <License>BSD-2-Clause</License>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <Tags>C# Helpers MessageBoxEx IconHelper ComboBoxEx StringResourceHelpers ViewModelBase MVVM .Net</Tags>
     <ReleaseNotes>
-      This is the initial checkin for the library. It contains some classes that will I will share amongst my
-      MVVM projects.
-
-      Fixing a couple of minor issues:
-      - ViewModelBase was not in the correct namespace
-      - Making ComboBoxEx a public class
+      These latest changes modify the project type to be a WPF Custom Control libray.
+      Renamed ComboBoxEx to ComboBoxWithAdd
+      Added the Default style for the ComboBoxWithAdd to the Generics.xaml so a caller can simply use it instead
+         of having to define one like they used to.
     </ReleaseNotes>
     <Description>Helper classes for common tasks between my MVVM applications</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Copyright>2023</Copyright>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="README.md" Pack="true" PackagePath="\" />
-    <None Include="LICENSE" Pack="true" PackagePath="" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
     <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
+    <ItemGroup>
+      <None Include="LICENSE.txt" Pack="true" PackagePath="" />
+      <None Include="README.md" Pack="true" PackagePath="" />
+    </ItemGroup>
+
 </Project>

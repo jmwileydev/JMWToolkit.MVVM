@@ -18,31 +18,18 @@ namespace JMWToolkit.MVVM.Helpers;
 
 public static partial class IconHelper
 {
-    [LibraryImport(
-        "user32.dll",
-        EntryPoint = "GetWindowLong"
-        )]
-    internal static partial int GetWindowLong(IntPtr hwnd, int index);
+    [DllImport("user32.dll")]
+    static extern int GetWindowLong(IntPtr hwnd, int index);
 
-    [LibraryImport(
-        "user32.dll",
-        EntryPoint = "SetWindowLong"
-        )]
-    internal static partial int SetWindowLong(IntPtr hwnd, int index, int newStyle);
+    [DllImport("user32.dll")]
+    static extern int SetWindowLong(IntPtr hwnd, int index, int newStyle);
 
-    [LibraryImport(
-        "user32.dll",
-        EntryPoint = "SetWindowPos"
-        )]
-    [return: MarshalAs(UnmanagedType.I4)]
-    internal static partial bool SetWindowPos(IntPtr hwnd, IntPtr hwndInsertAfter,
+    [DllImport("user32.dll")]
+    static extern bool SetWindowPos(IntPtr hwnd, IntPtr hwndInsertAfter,
                int x, int y, int width, int height, uint flags);
 
-    [LibraryImport(
-        "user32.dll",
-        EntryPoint = "SendMessage"
-        )]
-    internal static partial IntPtr SendMessage(IntPtr hwnd, uint msg,
+    [DllImport("user32.dll")]
+    static extern IntPtr SendMessage(IntPtr hwnd, uint msg,
                IntPtr wParam, IntPtr lParam);
 
     const int GWL_EXSTYLE = -20;

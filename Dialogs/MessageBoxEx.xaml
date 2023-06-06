@@ -42,10 +42,25 @@ LICENSE file in the root directory of this source tree
         <Border Background="#F0F0F0"  Grid.Row="1">
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"
                     Width="Auto" Height="Auto">
-                <Button Name="_OkButton" Content="{Binding OkButtonText}" Click="Button_Click"/>
-                <Button Name="_YesButton" Content="{Binding YesButtonText}" Visibility="Collapsed" d:Visibility="Visible" Click="Button_Click"></Button>
-                <Button Name="_NoButton" Visibility="Collapsed" d:Visibility="Visible" Content="{Binding NoButtonText}" Click="Button_Click"></Button>
-                <Button Name="_CancelButton" IsCancel="True" Visibility="Collapsed" d:Visibility="Visible" 
+                <Button Name="_OkButton" Content="{Binding OkButtonText}" Click="Button_Click" d:Content="OK"/>
+                <Button Name="_YesButton" Content="{Binding YesButtonText}" 
+                        Visibility="Collapsed" 
+                        d:Visibility="Visible" 
+                        d:Content="Yes"
+                        Click="Button_Click">
+                    
+                </Button>
+                <Button Name="_NoButton" 
+                        Visibility="Collapsed" 
+                        d:Visibility="Visible" 
+                        d:Content="No"
+                        Content="{Binding NoButtonText}" 
+                        Click="Button_Click"></Button>
+                <Button Name="_CancelButton" 
+                        IsCancel="True" 
+                        Visibility="Collapsed" 
+                        d:Visibility="Visible"
+                        d:Content="Cancel"
                     Click="Button_Click" Content="{Binding CancelButtonText}"></Button>
             </StackPanel>
         </Border>

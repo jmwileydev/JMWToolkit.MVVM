@@ -39,21 +39,6 @@ public class ViewModelBase : INotifyPropertyChanged
             }
         }
     }
-
-    public AsyncRelayCommand CreateAsyncRelayCommand(Func<Task> execute, Func<bool> canExecute, params string[] properties)
-    {
-        var command = new AsyncRelayCommand(execute, canExecute);
-        AddPropertiesAndCommands(command, properties);
-        return command;
-    }
-
-    public AsyncRelayCommand<T> CreateAsyncRelayCommand<T>(Func<T?, Task> execute, Predicate<T?> canExecute, params string[] properties)
-    {
-        var command = new AsyncRelayCommand<T>(execute, canExecute);
-        AddPropertiesAndCommands(command, properties);
-        return command;
-    }
-
     private void AddPropertiesAndCommands(IRelayCommand command, string[] properties)
     {
         foreach (var property in properties)
@@ -65,6 +50,37 @@ public class ViewModelBase : INotifyPropertyChanged
 
             _propertiesToCommands[property].Add(command);
         }
+    }
+
+    /// <summary>
+    /// Creates an AsyncRelayCommand for the ViewModel. The set of properties is used by the ViewModelBase to
+    /// determine when NotifyCanExcecuteChanged shoudl be called.
+    /// </summary>
+    /// <param name="execute">Function to be executed when command is clicked.</param>
+    /// <param name="canExecute">Function to determine if the command should be enabled.</param>
+    /// <param name="properties">List of properties which can cause the result of canExecute to change.</param>
+    /// <returns>A new AsyncRelayCommand</returns>
+    public AsyncRelayCommand CreateAsyncRelayCommand(Func<Task> execute, Func<bool> canExecute, params string[] properties)
+    {
+        var command = new AsyncRelayCommand(execute, canExecute);
+        AddPropertiesAndCommands(command, properties);
+        return command;
+    }
+
+    /// <summary>
+    /// Creates an AsyncRelayCommand for the ViewModel. The set of properties is used by the ViewModelBase to
+    /// determine when NotifyCanExcecuteChanged shoudl be called. This is the generic version for a Task which
+    /// returns a type.
+    /// </summary>
+    /// <param name="execute">Function to be executed when command is clicked.</param>
+    /// <param name="canExecute">Function to determine if the command should be enabled.</param>
+    /// <param name="properties">List of properties which can cause the result of canExecute to change.</param>
+    /// <returns>A new AsyncRelayCommand</returns>
+    public AsyncRelayCommand<T> CreateAsyncRelayCommand<T>(Func<T?, Task> execute, Predicate<T?> canExecute, params string[] properties)
+    {
+        var command = new AsyncRelayCommand<T>(execute, canExecute);
+        AddPropertiesAndCommands(command, properties);
+        return command;
     }
 
     public RelayCommand CreateRelayCommand(Action execute, Func<bool> canExecute, params string[] properties)
