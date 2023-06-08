@@ -7,15 +7,19 @@ LICENSE file in the root directory of this source tree.
 */
 using JMWToolkit.MVVM.ViewModels;
 using System;
+using System.Diagnostics.Metrics;
+using System.Runtime.Intrinsics.X86;
 using System.Windows;
+using System.Windows.Documents;
+using System.Windows.Shapes;
 
 namespace JMWToolkit.MVVM.Dialogs;
-
 
 /// <summary>
 /// Class used to Show a MessageBox dialog that allows formatted text for the caption. This
 /// is very similiar to the built in MessageBox class but with the text enhancements for the
-/// caption.
+/// caption. I will continue to add more features but for now the
+/// Caption area allows you to specify &lt;break&gt; in a line when you want a paragraph break.
 /// </summary>
 public class MessageBoxEx
 {

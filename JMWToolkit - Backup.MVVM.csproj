@@ -39,7 +39,7 @@
       <None Include="README.md" Pack="true" PackagePath="" />
     </ItemGroup>
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-      <Exec Command="copy $(ProjectDir)\obj\$(Configuration)\$(TargetFramework)\$(TargetName).md $(ProjectDir)\$(TargetName).md" />
+      <Exec Command="copy $(ProjectDir)\obj\*.md $(ProjectDir)" />
     </Target>
 
 </Project>

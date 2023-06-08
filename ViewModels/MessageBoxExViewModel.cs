@@ -89,10 +89,6 @@ internal class MessageBoxExViewModel : ViewModelBase
 
     public MessageBoxResult MessageBoxResult { get; private set; }
 
-    /// <summary>
-    /// Expose the button labels as Properties on the MessageBoxEx so that a caller can modify them for
-    /// localization.
-    /// </summary>
     public String OkButtonText { get; set; } = "Ok";
     public String CancelButtonText { get; set; } = "Cancel";
 
