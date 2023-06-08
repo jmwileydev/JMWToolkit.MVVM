@@ -5,6 +5,7 @@ All rights reserved.
 This source code is licensed under the BSD-style license found in the
 LICENSE file in the root directory of this source tree. 
 */
+using CommunityToolkit.Mvvm.Input;
 using JMWToolkit.MVVM.ViewModels;
 using System;
 using System.Drawing;
@@ -57,7 +58,7 @@ internal class MessageBoxExViewModel : ViewModelBase
             Image.Source = Imaging.CreateBitmapSourceFromHIcon(icon.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
         }
 
-        ButtonClickedCommand = CreateRelayCommand<MessageBoxExeCommandArgs>(
+        ButtonClickedCommand = new RelayCommand<MessageBoxExeCommandArgs>(
             (args) =>
             {
                 if (args != null)
@@ -88,10 +89,6 @@ internal class MessageBoxExViewModel : ViewModelBase
 
     public MessageBoxResult MessageBoxResult { get; private set; }
 
-    /// <summary>
-    /// Expose the button labels as Properties on the MessageBoxEx so that a caller can modify them for
-    /// localization.
-    /// </summary>
     public String OkButtonText { get; set; } = "Ok";
     public String CancelButtonText { get; set; } = "Cancel";
 
