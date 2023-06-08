@@ -7,15 +7,31 @@ using System.Text.RegularExpressions;
 
 namespace JMWToolkit.MVVM.ValueConverters;
 
+/// <summary>
+/// The MultilineTextConverter is used to convert a string with &lt;break&gt; lines in it to multiline
+/// text.
+///     - A single newline is trimmed from the start of the string
+///     - Any trailing newline characters are trimmed.
+///     - Lines are broken at the &lt;break&gt;
+///     - Trailing whitespace is removed from the last line.
+/// </summary>
 [ValueConversion(typeof(String), typeof(List<Inline>))]
 public partial class MultilineTextConverter : IValueConverter
 {
     [GeneratedRegex(@"[ ]*\n")]
     private static partial Regex _spacesAndNewLine();
 
-    public static List<Inline> Convert(String value)
+    /// <summary>
+    /// Converts the passed in string to a collection of Inline objects.
+    /// </summary>
+    /// <param name="value">string to be parsed and formatted</param>
+    /// <param name="targetType">type of the target property</param>
+    /// <param name="parameter">converter parameter</param>
+    /// <param name="culture">The culture to use in the converter</param>
+    /// <returns></returns>
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        String text = (String)value;
+        String text = ((String)value).TrimStart('\n');
 
         // Replace all "\n[ ]*" with "\n"
         text = _spacesAndNewLine().Replace(text, " ");
@@ -40,11 +56,16 @@ public partial class MultilineTextConverter : IValueConverter
 
         return inlineCollection;
     }
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return Convert((String)value);
-    }
 
+    /// <summary>
+    /// This routine is not implemented
+    /// </summary>
+    /// <param name="value">ignored</param>
+    /// <param name="targetType">ignored</param>
+    /// <param name="parameter">ignored</param>
+    /// <param name="culture">ignored</param>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();

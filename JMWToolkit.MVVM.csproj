@@ -4,6 +4,7 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <OutputType>Library</OutputType>
@@ -18,10 +19,8 @@
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <Tags>C# Helpers MessageBoxEx IconHelper ComboBoxEx StringResourceHelpers ViewModelBase MVVM .Net</Tags>
     <ReleaseNotes>
-      These latest changes modify the project type to be a WPF Custom Control libray.
-      Renamed ComboBoxEx to ComboBoxWithAdd
-      Added the Default style for the ComboBoxWithAdd to the Generics.xaml so a caller can simply use it instead
-         of having to define one like they used to.
+      Updated XML Documentation comments. I am going to research ways of generating markdown from these so I
+      don't have to do documentation twice.
     </ReleaseNotes>
     <Description>Helper classes for common tasks between my MVVM applications</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>

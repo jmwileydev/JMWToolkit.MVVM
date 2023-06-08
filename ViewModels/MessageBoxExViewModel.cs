@@ -5,6 +5,7 @@ All rights reserved.
 This source code is licensed under the BSD-style license found in the
 LICENSE file in the root directory of this source tree. 
 */
+using CommunityToolkit.Mvvm.Input;
 using JMWToolkit.MVVM.ViewModels;
 using System;
 using System.Drawing;
@@ -57,7 +58,7 @@ internal class MessageBoxExViewModel : ViewModelBase
             Image.Source = Imaging.CreateBitmapSourceFromHIcon(icon.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
         }
 
-        ButtonClickedCommand = CreateRelayCommand<MessageBoxExeCommandArgs>(
+        ButtonClickedCommand = new RelayCommand<MessageBoxExeCommandArgs>(
             (args) =>
             {
                 if (args != null)

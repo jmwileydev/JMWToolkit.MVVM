@@ -18,29 +18,44 @@ namespace JMWToolkit.MVVM.Controls;
 /// </summary>
 public class ComboBoxWithAdd : ComboBox
 {
+    /// <summary>
+    /// Default constructor for the ComboBoxWithAdd
+    /// </summary>
     public ComboBoxWithAdd()
     {
         DefaultStyleKeyProperty.OverrideMetadata(typeof(ComboBoxWithAdd), new FrameworkPropertyMetadata(typeof(ComboBoxWithAdd)));
     }
 
+    /// <summary>
+    /// Dependency property so the user can specify an ICommand for the AddNewItemCommand
+    /// </summary>
     public static readonly DependencyProperty AddNewItemCommandProperty =
             DependencyProperty.Register(
             "AddNewItemCommand",
             typeof(ICommand),
             typeof(ComboBoxWithAdd));
 
+    /// <summary>
+    /// Dependency Property so the user can specify the content of the AddNewItem button
+    /// </summary>
     public static readonly DependencyProperty AddNewItemContentProperty =
             DependencyProperty.Register(
             "AddNewItemContent",
             typeof(String),
             typeof(ComboBoxWithAdd));
 
+    /// <summary>
+    /// Dependency Property so the user can also pass an additional parameter to the AddNewItemCommand
+    /// </summary>
     public static readonly DependencyProperty AddNewItemCommandParameterProperty =
             DependencyProperty.Register(
             "AddNewItemCommandParameter",
             typeof(Object),
             typeof(ComboBoxWithAdd));
 
+    /// <summary>
+    /// The command executed with AddNewItem button is clicked
+    /// </summary>
     public ICommand AddNewItemCommand
     {
         get
@@ -53,6 +68,10 @@ public class ComboBoxWithAdd : ComboBox
             SetValue(AddNewItemCommandProperty, value);
         }
     }
+
+    /// <summary>
+    /// Parameter to be passed to the AddNewItem Command
+    /// </summary>
     public Object AddNewItemCommandParameter
     {
         get
@@ -66,6 +85,9 @@ public class ComboBoxWithAdd : ComboBox
         }
     }
 
+    /// <summary>
+    /// The content to be displayed in the AddNewItem button
+    /// </summary>
     public String AddNewItemContent
     {
         get
