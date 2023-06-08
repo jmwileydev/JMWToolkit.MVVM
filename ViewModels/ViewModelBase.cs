@@ -30,10 +30,9 @@ public class ViewModelBase : INotifyPropertyChanged
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-        List<IRelayCommand>? commands = null;
-        if (propertyName != null && _propertiesToCommands.TryGetValue(propertyName, out commands))
+        if (propertyName != null && _propertiesToCommands.TryGetValue(propertyName, out List<IRelayCommand>? commands))
         {
-            foreach(var command in commands)
+            foreach (var command in commands)
             {
                 command.NotifyCanExecuteChanged();
             }
@@ -67,6 +66,13 @@ public class ViewModelBase : INotifyPropertyChanged
         return command;
     }
 
+    public AsyncRelayCommand CreateAsyncRelayCommand(Func<Task> execute, params string[] properties)
+    {
+        var command = new AsyncRelayCommand(execute);
+        AddPropertiesAndCommands(command, properties);
+        return command;
+    }
+
     /// <summary>
     /// Creates an AsyncRelayCommand for the ViewModel. The set of properties is used by the ViewModelBase to
     /// determine when NotifyCanExcecuteChanged shoudl be called. This is the generic version for a Task which
@@ -83,6 +89,13 @@ public class ViewModelBase : INotifyPropertyChanged
         return command;
     }
 
+    public AsyncRelayCommand<T> CreateAsyncRelayCommand<T>(Func<T?, Task> execute, params string[] properties)
+    {
+        var command = new AsyncRelayCommand<T>(execute);
+        AddPropertiesAndCommands(command, properties);
+        return command;
+    }
+
     public RelayCommand CreateRelayCommand(Action execute, Func<bool> canExecute, params string[] properties)
     {
         var command = new RelayCommand(execute, canExecute);
@@ -90,9 +103,23 @@ public class ViewModelBase : INotifyPropertyChanged
         return command;
     }
 
+    public RelayCommand CreateRelayCommand(Action execute, params string[] properties)
+    {
+        var command = new RelayCommand(execute);
+        AddPropertiesAndCommands(command, properties);
+        return command;
+    }
+
     public RelayCommand<T> CreateRelayCommand<T>(Action<T?> execute, Predicate<T?> canExecute, params string[] properties)
     {
         var command = new RelayCommand<T>(execute, canExecute);
+        AddPropertiesAndCommands(command, properties);
+        return command;
+    }
+
+    public RelayCommand<T> CreateRelayCommand<T>(Action<T?> execute, params string[] properties)
+    {
+        var command = new RelayCommand<T>(execute);
         AddPropertiesAndCommands(command, properties);
         return command;
     }

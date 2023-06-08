@@ -12,7 +12,7 @@
     <PackageProjectUrl>https://github.com/jmwileydev/JMWToolkit.MVVM</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jmwileydev/JMWToolkit.MVVM</RepositoryUrl>
     <SignAssembly>false</SignAssembly>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Title>JMWToolkit Dot Net MVVM Helpers</Title>
     <License>BSD-2-Clause</License>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>

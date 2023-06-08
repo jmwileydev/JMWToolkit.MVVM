@@ -34,5 +34,26 @@ TODO add more comments for the above commands
 A combo box that has an AddNewButton that the user can enable and show.
 
 ## MessageBoxEx
-A message box that allows the user to specify text with newlines.
+This is a message box for displaying some custom messages. I will continue to add more features but for now the
+Caption area allows you to specify <break> in a line when you want a paragraph break. For instance if you specify
+your string resource as follows:
+```
+    <system:String x:Key="DefaultCaption">
+    Here is a string that will be the first paragraph. I want to spill onto
+a new line so you can see how paragraphs will be indented.&lt;break&gt;
+    This second line should be indented to match the indention level of the
+first line. All extra spaces "        " in your text should be preserved. Except
+those after the last new line.
+    </system:String>
+```
+The caption will look like below
+```
+    Here is a string that will be the first paragraph. I want to spill onto a new line so you can see how paragraphs will
+be indented
+    This second line should be indented to match the indention level of the first line. All extra spaces "        " in your
+text should be preserved. Except those after the last new line.
+```
 
+My plan in the future is to support some more simply formatting values. For instance <bold> would be nice. However
+to do that I will probably end up switching to use XmlReader to parse the text. For now I am simply using simple
+string operations.
