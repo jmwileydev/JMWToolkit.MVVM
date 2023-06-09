@@ -27,9 +27,8 @@ public static class TextBlockExtensions
 
     private static void OnBindableInlinesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is TextBlock)
+        if (d is TextBlock textBlock)
         {
-            TextBlock textBlock = (TextBlock)d;
             textBlock.Inlines.Clear();
             textBlock.Inlines.AddRange((System.Collections.IEnumerable)e.NewValue);
         }
