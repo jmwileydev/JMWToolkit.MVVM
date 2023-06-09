@@ -135,6 +135,15 @@ public partial class MultilineTextConverter : IValueConverter
         // If I get here then the document was not well formed
         return DependencyProperty.UnsetValue;
     }
+
+    /// <summary>
+    /// This routine is used to convert from a string to an Inline collection. All other types will
+    /// fail.
+    /// </summary>
+    /// <param name="value">The string to be converted</param>
+    /// <param name="targetType">Should be an IEnumerable of Inline</param>
+    /// <param name="parameter">ignored</param>
+    /// <param name="culture">ignored</param>
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         var str = value as String ?? String.Empty;
@@ -147,6 +156,15 @@ public partial class MultilineTextConverter : IValueConverter
         return Convert(str);
     }
 
+    /// <summary>
+    /// This routine is not implemented
+    /// </summary>
+    /// <param name="value">ignored</param>
+    /// <param name="targetType">ignored</param>
+    /// <param name="parameter">ignored</param>
+    /// <param name="culture">ignored</param>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();

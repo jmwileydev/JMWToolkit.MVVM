@@ -24,8 +24,15 @@ public class ViewModelBase : INotifyPropertyChanged
 {
     private readonly Dictionary<string, List<IRelayCommand>> _propertiesToCommands = new();
 
+    /// <summary>
+    /// PropertyChanged event which will be called whenever OnPropertyChanged is called.
+    /// </summary>
     public event PropertyChangedEventHandler? PropertyChanged;
 
+    /// <summary>
+    /// Methods derived classes should call when a property value is changed to notify clients.
+    /// </summary>
+    /// <param name="propertyName"></param>
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -38,6 +45,7 @@ public class ViewModelBase : INotifyPropertyChanged
             }
         }
     }
+
     private void AddPropertiesAndCommands(IRelayCommand command, string[] properties)
     {
         foreach (var property in properties)
@@ -52,8 +60,8 @@ public class ViewModelBase : INotifyPropertyChanged
     }
 
     /// <summary>
-    /// Creates an AsyncRelayCommand for the ViewModel. The set of properties is used by the ViewModelBase to
-    /// determine when NotifyCanExcecuteChanged shoudl be called.
+    /// Helper function to create an AsyncRelayCommand for the ViewModel. The ViewModelBase will call NotifyCanExecuteChanged
+    /// when one of the supplied properties changes.
     /// </summary>
     /// <param name="execute">Function to be executed when command is clicked.</param>
     /// <param name="canExecute">Function to determine if the command should be enabled.</param>
@@ -66,17 +74,9 @@ public class ViewModelBase : INotifyPropertyChanged
         return command;
     }
 
-    public AsyncRelayCommand CreateAsyncRelayCommand(Func<Task> execute, params string[] properties)
-    {
-        var command = new AsyncRelayCommand(execute);
-        AddPropertiesAndCommands(command, properties);
-        return command;
-    }
-
     /// <summary>
-    /// Creates an AsyncRelayCommand for the ViewModel. The set of properties is used by the ViewModelBase to
-    /// determine when NotifyCanExcecuteChanged shoudl be called. This is the generic version for a Task which
-    /// returns a type.
+    /// Helper function to create an AsyncRelayCommand for the ViewModel. The ViewModelBase will call NotifyCanExecuteChanged
+    /// when one of the supplied properties changes.
     /// </summary>
     /// <param name="execute">Function to be executed when command is clicked.</param>
     /// <param name="canExecute">Function to determine if the command should be enabled.</param>
@@ -89,13 +89,14 @@ public class ViewModelBase : INotifyPropertyChanged
         return command;
     }
 
-    public AsyncRelayCommand<T> CreateAsyncRelayCommand<T>(Func<T?, Task> execute, params string[] properties)
-    {
-        var command = new AsyncRelayCommand<T>(execute);
-        AddPropertiesAndCommands(command, properties);
-        return command;
-    }
-
+    /// <summary>
+    /// Helper function to create an RelayCommand for the ViewModel. The ViewModelBase will call NotifyCanExecuteChanged
+    /// when one of the supplied properties changes.
+    /// </summary>
+    /// <param name="execute">Function to be executed when command is clicked.</param>
+    /// <param name="canExecute">Function to determine if the command should be enabled.</param>
+    /// <param name="properties">List of properties which can cause the result of canExecute to change.</param>
+    /// <returns>A new RelayCommand</returns>
     public RelayCommand CreateRelayCommand(Action execute, Func<bool> canExecute, params string[] properties)
     {
         var command = new RelayCommand(execute, canExecute);
@@ -103,23 +104,17 @@ public class ViewModelBase : INotifyPropertyChanged
         return command;
     }
 
-    public RelayCommand CreateRelayCommand(Action execute, params string[] properties)
-    {
-        var command = new RelayCommand(execute);
-        AddPropertiesAndCommands(command, properties);
-        return command;
-    }
-
+    /// <summary>
+    /// Helper function to create an RelayCommand for the ViewModel. The ViewModelBase will call NotifyCanExecuteChanged
+    /// when one of the supplied properties changes.
+    /// </summary>
+    /// <param name="execute">Function to be executed when command is clicked.</param>
+    /// <param name="canExecute">Function to determine if the command should be enabled.</param>
+    /// <param name="properties">List of properties which can cause the result of canExecute to change.</param>
+    /// <returns>A new RelayCommand</returns>
     public RelayCommand<T> CreateRelayCommand<T>(Action<T?> execute, Predicate<T?> canExecute, params string[] properties)
     {
         var command = new RelayCommand<T>(execute, canExecute);
-        AddPropertiesAndCommands(command, properties);
-        return command;
-    }
-
-    public RelayCommand<T> CreateRelayCommand<T>(Action<T?> execute, params string[] properties)
-    {
-        var command = new RelayCommand<T>(execute);
         AddPropertiesAndCommands(command, properties);
         return command;
     }
