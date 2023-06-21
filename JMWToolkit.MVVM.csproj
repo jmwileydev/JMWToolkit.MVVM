@@ -4,7 +4,9 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DocumentationMarkdown>$(MSBuildProjectDirectory)\JMWToolkit.MVVM.md</DocumentationMarkdown>
   </PropertyGroup>
   <PropertyGroup>
     <OutputType>Library</OutputType>
@@ -13,7 +15,7 @@
     <PackageProjectUrl>https://github.com/jmwileydev/JMWToolkit.MVVM</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jmwileydev/JMWToolkit.MVVM</RepositoryUrl>
     <SignAssembly>false</SignAssembly>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <Title>JMWToolkit Dot Net MVVM Helpers</Title>
     <License>BSD-2-Clause</License>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
@@ -25,11 +27,16 @@
     <Description>Helper classes for common tasks between my MVVM applications</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Copyright>2023</Copyright>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.7" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
     <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
-    <PackageReference Include="Vsxmd" Version="1.4.5">
+    <PackageReference Include="Vsxmd" Version="1.4.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -38,8 +45,4 @@
       <None Include="LICENSE.txt" Pack="true" PackagePath="" />
       <None Include="README.md" Pack="true" PackagePath="" />
     </ItemGroup>
-    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-      <Exec Command="copy $(ProjectDir)\obj\$(Configuration)\$(TargetFramework)\$(TargetName).md $(ProjectDir)\$(TargetName).md" />
-    </Target>
-
 </Project>

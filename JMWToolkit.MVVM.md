@@ -3,26 +3,38 @@
 
 ## Contents
 
+- [AppBase](#T-JMWToolkit-MVVM-AppBase 'JMWToolkit.MVVM.AppBase')
+  - [#ctor()](#M-JMWToolkit-MVVM-AppBase-#ctor-System-Action{Microsoft-Extensions-DependencyInjection-IServiceCollection}- 'JMWToolkit.MVVM.AppBase.#ctor(System.Action{Microsoft.Extensions.DependencyInjection.IServiceCollection})')
+  - [AppHost](#P-JMWToolkit-MVVM-AppBase-AppHost 'JMWToolkit.MVVM.AppBase.AppHost')
+  - [GetConfiguredService\`\`1()](#M-JMWToolkit-MVVM-AppBase-GetConfiguredService``1 'JMWToolkit.MVVM.AppBase.GetConfiguredService``1')
+  - [StartAppHost()](#M-JMWToolkit-MVVM-AppBase-StartAppHost 'JMWToolkit.MVVM.AppBase.StartAppHost')
+  - [StopAppHost()](#M-JMWToolkit-MVVM-AppBase-StopAppHost 'JMWToolkit.MVVM.AppBase.StopAppHost')
+- [AppServiceLocator](#T-JMWToolkit-MVVM-AppServiceLocator 'JMWToolkit.MVVM.AppServiceLocator')
+  - [GetConfiguredService\`\`1()](#M-JMWToolkit-MVVM-AppServiceLocator-GetConfiguredService``1 'JMWToolkit.MVVM.AppServiceLocator.GetConfiguredService``1')
 - [ComboBoxWithAdd](#T-JMWToolkit-MVVM-Controls-ComboBoxWithAdd 'JMWToolkit.MVVM.Controls.ComboBoxWithAdd')
-  - [#ctor()](#M-JMWToolkit-MVVM-Controls-ComboBoxWithAdd-#ctor 'JMWToolkit.MVVM.Controls.ComboBoxWithAdd.#ctor')
   - [AddNewItemCommandParameterProperty](#F-JMWToolkit-MVVM-Controls-ComboBoxWithAdd-AddNewItemCommandParameterProperty 'JMWToolkit.MVVM.Controls.ComboBoxWithAdd.AddNewItemCommandParameterProperty')
   - [AddNewItemCommandProperty](#F-JMWToolkit-MVVM-Controls-ComboBoxWithAdd-AddNewItemCommandProperty 'JMWToolkit.MVVM.Controls.ComboBoxWithAdd.AddNewItemCommandProperty')
   - [AddNewItemContentProperty](#F-JMWToolkit-MVVM-Controls-ComboBoxWithAdd-AddNewItemContentProperty 'JMWToolkit.MVVM.Controls.ComboBoxWithAdd.AddNewItemContentProperty')
   - [AddNewItemCommand](#P-JMWToolkit-MVVM-Controls-ComboBoxWithAdd-AddNewItemCommand 'JMWToolkit.MVVM.Controls.ComboBoxWithAdd.AddNewItemCommand')
   - [AddNewItemCommandParameter](#P-JMWToolkit-MVVM-Controls-ComboBoxWithAdd-AddNewItemCommandParameter 'JMWToolkit.MVVM.Controls.ComboBoxWithAdd.AddNewItemCommandParameter')
   - [AddNewItemContent](#P-JMWToolkit-MVVM-Controls-ComboBoxWithAdd-AddNewItemContent 'JMWToolkit.MVVM.Controls.ComboBoxWithAdd.AddNewItemContent')
+  - [#cctor()](#M-JMWToolkit-MVVM-Controls-ComboBoxWithAdd-#cctor 'JMWToolkit.MVVM.Controls.ComboBoxWithAdd.#cctor')
 - [IconHelper](#T-JMWToolkit-MVVM-Helpers-IconHelper 'JMWToolkit.MVVM.Helpers.IconHelper')
   - [RemoveIcon(window)](#M-JMWToolkit-MVVM-Helpers-IconHelper-RemoveIcon-System-Windows-Window- 'JMWToolkit.MVVM.Helpers.IconHelper.RemoveIcon(System.Windows.Window)')
 - [MessageBoxEx](#T-JMWToolkit-MVVM-Dialogs-MessageBoxEx 'JMWToolkit.MVVM.Dialogs.MessageBoxEx')
   - [ShowDialog(caption,title,buttons,image)](#M-JMWToolkit-MVVM-Dialogs-MessageBoxEx-ShowDialog-System-String,System-String,System-Windows-MessageBoxButton,System-Windows-MessageBoxImage- 'JMWToolkit.MVVM.Dialogs.MessageBoxEx.ShowDialog(System.String,System.String,System.Windows.MessageBoxButton,System.Windows.MessageBoxImage)')
-- [MessageBoxExViewModel](#T-JMWToolkit-MVVM-ViewModels-MessageBoxExViewModel 'JMWToolkit.MVVM.ViewModels.MessageBoxExViewModel')
-  - [OkButtonText](#P-JMWToolkit-MVVM-ViewModels-MessageBoxExViewModel-OkButtonText 'JMWToolkit.MVVM.ViewModels.MessageBoxExViewModel.OkButtonText')
 - [MessageBoxExWindow](#T-JMWToolkit-MVVM-Dialogs-MessageBoxExWindow 'JMWToolkit.MVVM.Dialogs.MessageBoxExWindow')
   - [InitializeComponent()](#M-JMWToolkit-MVVM-Dialogs-MessageBoxExWindow-InitializeComponent 'JMWToolkit.MVVM.Dialogs.MessageBoxExWindow.InitializeComponent')
 - [MultilineTextConverter](#T-JMWToolkit-MVVM-ValueConverters-MultilineTextConverter 'JMWToolkit.MVVM.ValueConverters.MultilineTextConverter')
   - [Convert(value,targetType,parameter,culture)](#M-JMWToolkit-MVVM-ValueConverters-MultilineTextConverter-Convert-System-Object,System-Type,System-Object,System-Globalization-CultureInfo- 'JMWToolkit.MVVM.ValueConverters.MultilineTextConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)')
   - [ConvertBack(value,targetType,parameter,culture)](#M-JMWToolkit-MVVM-ValueConverters-MultilineTextConverter-ConvertBack-System-Object,System-Type,System-Object,System-Globalization-CultureInfo- 'JMWToolkit.MVVM.ValueConverters.MultilineTextConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)')
   - [_spacesAndNewLine()](#M-JMWToolkit-MVVM-ValueConverters-MultilineTextConverter-_spacesAndNewLine 'JMWToolkit.MVVM.ValueConverters.MultilineTextConverter._spacesAndNewLine')
+- [Runner](#T-System-Text-RegularExpressions-Generated-_spacesAndNewLine_0-RunnerFactory-Runner 'System.Text.RegularExpressions.Generated._spacesAndNewLine_0.RunnerFactory.Runner')
+  - [Scan(inputSpan)](#M-System-Text-RegularExpressions-Generated-_spacesAndNewLine_0-RunnerFactory-Runner-Scan-System-ReadOnlySpan{System-Char}- 'System.Text.RegularExpressions.Generated._spacesAndNewLine_0.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})')
+  - [TryFindNextPossibleStartingPosition(inputSpan)](#M-System-Text-RegularExpressions-Generated-_spacesAndNewLine_0-RunnerFactory-Runner-TryFindNextPossibleStartingPosition-System-ReadOnlySpan{System-Char}- 'System.Text.RegularExpressions.Generated._spacesAndNewLine_0.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})')
+  - [TryMatchAtCurrentPosition(inputSpan)](#M-System-Text-RegularExpressions-Generated-_spacesAndNewLine_0-RunnerFactory-Runner-TryMatchAtCurrentPosition-System-ReadOnlySpan{System-Char}- 'System.Text.RegularExpressions.Generated._spacesAndNewLine_0.RunnerFactory.Runner.TryMatchAtCurrentPosition(System.ReadOnlySpan{System.Char})')
+- [RunnerFactory](#T-System-Text-RegularExpressions-Generated-_spacesAndNewLine_0-RunnerFactory 'System.Text.RegularExpressions.Generated._spacesAndNewLine_0.RunnerFactory')
+  - [CreateInstance()](#M-System-Text-RegularExpressions-Generated-_spacesAndNewLine_0-RunnerFactory-CreateInstance 'System.Text.RegularExpressions.Generated._spacesAndNewLine_0.RunnerFactory.CreateInstance')
 - [StringResourceHelpers](#T-JMWToolkit-MVVM-Helpers-StringResourceHelpers 'JMWToolkit.MVVM.Helpers.StringResourceHelpers')
   - [LoadAndFormatStringResource(format,args)](#M-JMWToolkit-MVVM-Helpers-StringResourceHelpers-LoadAndFormatStringResource-System-String,System-Object[]- 'JMWToolkit.MVVM.Helpers.StringResourceHelpers.LoadAndFormatStringResource(System.String,System.Object[])')
   - [LoadStringResource(resourceId)](#M-JMWToolkit-MVVM-Helpers-StringResourceHelpers-LoadStringResource-System-String- 'JMWToolkit.MVVM.Helpers.StringResourceHelpers.LoadStringResource(System.String)')
@@ -31,12 +43,122 @@
   - [GetBindableInlines(obj)](#M-JMWToolkit-MVVM-Extensions-TextBlockExtensions-GetBindableInlines-System-Windows-DependencyObject- 'JMWToolkit.MVVM.Extensions.TextBlockExtensions.GetBindableInlines(System.Windows.DependencyObject)')
   - [OnBindableInlinesChanged(d,e)](#M-JMWToolkit-MVVM-Extensions-TextBlockExtensions-OnBindableInlinesChanged-System-Windows-DependencyObject,System-Windows-DependencyPropertyChangedEventArgs- 'JMWToolkit.MVVM.Extensions.TextBlockExtensions.OnBindableInlinesChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)')
   - [SetBindableInlines(obj,value)](#M-JMWToolkit-MVVM-Extensions-TextBlockExtensions-SetBindableInlines-System-Windows-DependencyObject,System-Collections-Generic-IEnumerable{System-Windows-Documents-Inline}- 'JMWToolkit.MVVM.Extensions.TextBlockExtensions.SetBindableInlines(System.Windows.DependencyObject,System.Collections.Generic.IEnumerable{System.Windows.Documents.Inline})')
+- [Utilities](#T-System-Text-RegularExpressions-Generated-Utilities 'System.Text.RegularExpressions.Generated.Utilities')
+  - [s_defaultTimeout](#F-System-Text-RegularExpressions-Generated-Utilities-s_defaultTimeout 'System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout')
+  - [s_hasTimeout](#F-System-Text-RegularExpressions-Generated-Utilities-s_hasTimeout 'System.Text.RegularExpressions.Generated.Utilities.s_hasTimeout')
 - [ViewModelBase](#T-JMWToolkit-MVVM-ViewModels-ViewModelBase 'JMWToolkit.MVVM.ViewModels.ViewModelBase')
   - [CreateAsyncRelayCommand(execute,canExecute,properties)](#M-JMWToolkit-MVVM-ViewModels-ViewModelBase-CreateAsyncRelayCommand-System-Func{System-Threading-Tasks-Task},System-Func{System-Boolean},System-String[]- 'JMWToolkit.MVVM.ViewModels.ViewModelBase.CreateAsyncRelayCommand(System.Func{System.Threading.Tasks.Task},System.Func{System.Boolean},System.String[])')
   - [CreateAsyncRelayCommand\`\`1(execute,canExecute,properties)](#M-JMWToolkit-MVVM-ViewModels-ViewModelBase-CreateAsyncRelayCommand``1-System-Func{``0,System-Threading-Tasks-Task},System-Predicate{``0},System-String[]- 'JMWToolkit.MVVM.ViewModels.ViewModelBase.CreateAsyncRelayCommand``1(System.Func{``0,System.Threading.Tasks.Task},System.Predicate{``0},System.String[])')
   - [CreateRelayCommand(execute,canExecute,properties)](#M-JMWToolkit-MVVM-ViewModels-ViewModelBase-CreateRelayCommand-System-Action,System-Func{System-Boolean},System-String[]- 'JMWToolkit.MVVM.ViewModels.ViewModelBase.CreateRelayCommand(System.Action,System.Func{System.Boolean},System.String[])')
   - [CreateRelayCommand\`\`1(execute,canExecute,properties)](#M-JMWToolkit-MVVM-ViewModels-ViewModelBase-CreateRelayCommand``1-System-Action{``0},System-Predicate{``0},System-String[]- 'JMWToolkit.MVVM.ViewModels.ViewModelBase.CreateRelayCommand``1(System.Action{``0},System.Predicate{``0},System.String[])')
   - [OnPropertyChanged(propertyName)](#M-JMWToolkit-MVVM-ViewModels-ViewModelBase-OnPropertyChanged-System-String- 'JMWToolkit.MVVM.ViewModels.ViewModelBase.OnPropertyChanged(System.String)')
+- [_spacesAndNewLine_0](#T-System-Text-RegularExpressions-Generated-_spacesAndNewLine_0 'System.Text.RegularExpressions.Generated._spacesAndNewLine_0')
+  - [#ctor()](#M-System-Text-RegularExpressions-Generated-_spacesAndNewLine_0-#ctor 'System.Text.RegularExpressions.Generated._spacesAndNewLine_0.#ctor')
+  - [Instance](#F-System-Text-RegularExpressions-Generated-_spacesAndNewLine_0-Instance 'System.Text.RegularExpressions.Generated._spacesAndNewLine_0.Instance')
+
+<a name='T-JMWToolkit-MVVM-AppBase'></a>
+## AppBase `type`
+
+##### Namespace
+
+JMWToolkit.MVVM
+
+##### Summary
+
+This is a helper class for locating ViewModel's that are registered with
+
+<a name='M-JMWToolkit-MVVM-AppBase-#ctor-System-Action{Microsoft-Extensions-DependencyInjection-IServiceCollection}-'></a>
+### #ctor() `constructor`
+
+##### Summary
+
+Constructor for the AppBase will call configure services for dependency injection
+
+##### Parameters
+
+This constructor has no parameters.
+
+<a name='P-JMWToolkit-MVVM-AppBase-AppHost'></a>
+### AppHost `property`
+
+##### Summary
+
+Get the AppHost for the Application
+
+<a name='M-JMWToolkit-MVVM-AppBase-GetConfiguredService``1'></a>
+### GetConfiguredService\`\`1() `method`
+
+##### Summary
+
+Get's a configured service from the AppHost if it was created during construction.
+
+##### Returns
+
+
+
+##### Parameters
+
+This method has no parameters.
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T |  |
+
+<a name='M-JMWToolkit-MVVM-AppBase-StartAppHost'></a>
+### StartAppHost() `method`
+
+##### Summary
+
+If the AppHost has been configured during construction this routine will call StaryAsync.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-JMWToolkit-MVVM-AppBase-StopAppHost'></a>
+### StopAppHost() `method`
+
+##### Summary
+
+If the AppHost has been configured during construction this will call StopAsync.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='T-JMWToolkit-MVVM-AppServiceLocator'></a>
+## AppServiceLocator `type`
+
+##### Namespace
+
+JMWToolkit.MVVM
+
+##### Summary
+
+This class can be used to find a service configured by the app.
+
+<a name='M-JMWToolkit-MVVM-AppServiceLocator-GetConfiguredService``1'></a>
+### GetConfiguredService\`\`1() `method`
+
+##### Summary
+
+Queries the AppHost and returns the configured service
+
+##### Returns
+
+
+
+##### Parameters
+
+This method has no parameters.
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T |  |
 
 <a name='T-JMWToolkit-MVVM-Controls-ComboBoxWithAdd'></a>
 ## ComboBoxWithAdd `type`
@@ -49,17 +171,6 @@ JMWToolkit.MVVM.Controls
 
 ComboBoxWithAdd - adds an optional button to the bottom of the ComboBox drop down so that the user can choose to
 add a new item into the list.
-
-<a name='M-JMWToolkit-MVVM-Controls-ComboBoxWithAdd-#ctor'></a>
-### #ctor() `constructor`
-
-##### Summary
-
-Default constructor for the ComboBoxWithAdd
-
-##### Parameters
-
-This constructor has no parameters.
 
 <a name='F-JMWToolkit-MVVM-Controls-ComboBoxWithAdd-AddNewItemCommandParameterProperty'></a>
 ### AddNewItemCommandParameterProperty `constants`
@@ -103,67 +214,12 @@ Parameter to be passed to the AddNewItem Command
 
 The content to be displayed in the AddNewItem button
 
-<a name='T-XamlGeneratedNamespace-GeneratedInternalTypeHelper'></a>
-## GeneratedInternalTypeHelper `type`
-
-##### Namespace
-
-XamlGeneratedNamespace
+<a name='M-JMWToolkit-MVVM-Controls-ComboBoxWithAdd-#cctor'></a>
+### #cctor() `method`
 
 ##### Summary
 
-GeneratedInternalTypeHelper
-
-<a name='M-XamlGeneratedNamespace-GeneratedInternalTypeHelper-AddEventHandler-System-Reflection-EventInfo,System-Object,System-Delegate-'></a>
-### AddEventHandler() `method`
-
-##### Summary
-
-AddEventHandler
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='M-XamlGeneratedNamespace-GeneratedInternalTypeHelper-CreateDelegate-System-Type,System-Object,System-String-'></a>
-### CreateDelegate() `method`
-
-##### Summary
-
-CreateDelegate
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='M-XamlGeneratedNamespace-GeneratedInternalTypeHelper-CreateInstance-System-Type,System-Globalization-CultureInfo-'></a>
-### CreateInstance() `method`
-
-##### Summary
-
-CreateInstance
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='M-XamlGeneratedNamespace-GeneratedInternalTypeHelper-GetPropertyValue-System-Reflection-PropertyInfo,System-Object,System-Globalization-CultureInfo-'></a>
-### GetPropertyValue() `method`
-
-##### Summary
-
-GetPropertyValue
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='M-XamlGeneratedNamespace-GeneratedInternalTypeHelper-SetPropertyValue-System-Reflection-PropertyInfo,System-Object,System-Object,System-Globalization-CultureInfo-'></a>
-### SetPropertyValue() `method`
-
-##### Summary
-
-SetPropertyValue
+Default constructor for the ComboBoxWithAdd
 
 ##### Parameters
 
@@ -230,21 +286,6 @@ with ;lt;break> in between paragraph. |
 | image | [System.Windows.MessageBoxImage](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Windows.MessageBoxImage 'System.Windows.MessageBoxImage') | This is one of the enum values MessageBoxImage.Information, MessageBoxImage.Warning, 
     MessageBoxImage.Error, or MessageBoxImage.Question defaults to MessageBoxImage.Informormation |
 
-<a name='T-JMWToolkit-MVVM-ViewModels-MessageBoxExViewModel'></a>
-## MessageBoxExViewModel `type`
-
-##### Namespace
-
-JMWToolkit.MVVM.ViewModels
-
-<a name='P-JMWToolkit-MVVM-ViewModels-MessageBoxExViewModel-OkButtonText'></a>
-### OkButtonText `property`
-
-##### Summary
-
-Expose the button labels as Properties on the MessageBoxEx so that a caller can modify them for
-localization.
-
 <a name='T-JMWToolkit-MVVM-Dialogs-MessageBoxExWindow'></a>
 ## MessageBoxExWindow `type`
 
@@ -277,32 +318,25 @@ JMWToolkit.MVVM.ValueConverters
 
 ##### Summary
 
-The MultilineTextConverter is used to convert a string with <break> lines in it to multiline
-text.
-    - A single newline is trimmed from the start of the string
-    - Any trailing newline characters are trimmed.
-    - Lines are broken at the <break>
-    - Trailing whitespace is removed from the last line.
+The MultiLineTextConverter is a value converter to go from a String value to a
+collection of Inline objects for rich formatting of the text.
 
 <a name='M-JMWToolkit-MVVM-ValueConverters-MultilineTextConverter-Convert-System-Object,System-Type,System-Object,System-Globalization-CultureInfo-'></a>
 ### Convert(value,targetType,parameter,culture) `method`
 
 ##### Summary
 
-Converts the passed in string to a collection of Inline objects.
-
-##### Returns
-
-
+This routine is used to convert from a string to an Inline collection. All other types will
+fail.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| value | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | string to be parsed and formatted |
-| targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | type of the target property |
-| parameter | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | converter parameter |
-| culture | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') | The culture to use in the converter |
+| value | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | The string to be converted |
+| targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Should be an IEnumerable of Inline |
+| parameter | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | ignored |
+| culture | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') | ignored |
 
 <a name='M-JMWToolkit-MVVM-ValueConverters-MultilineTextConverter-ConvertBack-System-Object,System-Type,System-Object,System-Globalization-CultureInfo-'></a>
 ### ConvertBack(value,targetType,parameter,culture) `method`

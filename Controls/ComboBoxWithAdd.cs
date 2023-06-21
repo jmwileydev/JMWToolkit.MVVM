@@ -21,7 +21,7 @@ public class ComboBoxWithAdd : ComboBox
     /// <summary>
     /// Default constructor for the ComboBoxWithAdd
     /// </summary>
-    public ComboBoxWithAdd()
+    static ComboBoxWithAdd()
     {
         DefaultStyleKeyProperty.OverrideMetadata(typeof(ComboBoxWithAdd), new FrameworkPropertyMetadata(typeof(ComboBoxWithAdd)));
     }
