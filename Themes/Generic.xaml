@@ -4,6 +4,12 @@
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
     xmlns:controls="clr-namespace:JMWToolkit.MVVM.Controls">
 
+    <!-- To modify the colors for ComboBoxWithAdd you need to modify the colors below.
+         NOTE: There are three SystemColors used in here you will need to modify also. Two for the
+         the dropDownBorder and one for the foreground of the TextColor defined at the very bottom
+    -->
+
+    <!-- FocusVisualStyle is a style applied to a control when it get focus via the Keyboard -->
     <Style x:Key="FocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>

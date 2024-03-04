@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -13,7 +13,7 @@
     <PackageProjectUrl>https://github.com/jmwileydev/JMWToolkit.MVVM</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jmwileydev/JMWToolkit.MVVM</RepositoryUrl>
     <SignAssembly>false</SignAssembly>
-    <Version>1.0.4</Version>
+    <Version>1.0.6</Version>
     <Title>JMWToolkit Dot Net MVVM Helpers</Title>
     <License>BSD-2-Clause</License>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
@@ -27,19 +27,15 @@
     <Copyright>2023</Copyright>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
-    <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
     <PackageReference Include="Vsxmd" Version="1.4.5">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="System.Drawing.Common" Version="8.0.2" />
   </ItemGroup>
-    <ItemGroup>
-      <None Include="LICENSE.txt" Pack="true" PackagePath="" />
-      <None Include="README.md" Pack="true" PackagePath="" />
-    </ItemGroup>
-    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-      <Exec Command="copy $(ProjectDir)\obj\$(Configuration)\$(TargetFramework)\$(TargetName).md $(ProjectDir)\$(TargetName).md" />
-    </Target>
-
+  <ItemGroup>
+    <None Include="LICENSE.txt" Pack="true" PackagePath="" />
+    <None Include="README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
 </Project>
