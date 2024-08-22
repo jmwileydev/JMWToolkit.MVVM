@@ -1,0 +1,262 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:controls="clr-namespace:JMWToolkit.MVVM.Controls"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="MoveableWindow.TitleForeground" Color="#416835"/>
+    <SolidColorBrush x:Key="MoveableWindow.TitleDisabledForeground" Color="#77936f"/>
+    <SolidColorBrush x:Key="MoveableWindow.Background" Color="#f8faf0"/>
+    <SolidColorBrush x:Key="MoveableWindow.TitleBackground" Color="#d8dbd1"/>
+    <SolidColorBrush x:Key="MoveableWindow.BorderBrush" Color="#416835"/>
+    <system:Double x:Key="MoveableWindow.TitleBarHeight">25</system:Double>
+
+    <Style x:Key="MoveableWindowBaseTitleStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Margin" Value="0,0,0,0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource MoveableWindow.TitleForeground}"/>
+    </Style>
+
+    <!--<Style x:Key="MoveableWindowIconButtonStyle" BasedOn="{StaticResource IconButtonStyle}" TargetType="controls:RoundedCornerButton">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type  controls:RoundedCornerButton}">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" Padding="8,0" VerticalAlignment="Stretch"
+                            BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true" CornerRadius="{TemplateBinding CornerRadius}">
+                        <TextBlock x:Name="textBlock" Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Path=IconGlyph}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                   FontSize="{TemplateBinding FontSize}" Margin="10,0,10,0"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsDefaulted" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource IconButton.MouseOver.BackgroundBrush}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource IconButton.MouseOver.BorderBrush}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource IconButton.MouseOver.ForegroundBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource IconButton.Pressed.BackgroundBrush}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource IconButton.Pressed.BorderBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource IconButton.Disabled.BackgroundBrush}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource IconButton.Disabled.BorderBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="textBlock" Value="{StaticResource WindowIconButtonDisabledForeground}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
+
+    <Style x:Key="BorderPathStyle" TargetType="Path">
+        <Style.Triggers>
+            <DataTrigger  Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:MoveableWindow}, Path=Resizable}" Value="False">
+                <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="BorderRectangleStyle" TargetType="Rectangle">
+        <Style.Triggers>
+            <DataTrigger  Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:MoveableWindow}, Path=Resizable}" Value="False">
+                <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--<converters:WindowStateToVisibility x:Key="WindowStateToVisibilityConverter"/>
+    <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>-->
+
+    <Style x:Key="MoveableWindowBaseStyle" TargetType="controls:MoveableWindow">
+        <Setter Property="WindowStyle" Value="None"/>
+        <Setter Property="AllowsTransparency" Value="True"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Grid Background="Transparent">
+                        <Grid.OpacityMask>
+                            <VisualBrush Visual="{Binding ElementName=MainBorder}" />
+                        </Grid.OpacityMask>
+                        <Border x:Name="MainBorder" BorderThickness="1" BorderBrush="{StaticResource MoveableWindow.TitleForeground}" CornerRadius="10,10,10,10"
+                            Background="{StaticResource MoveableWindow.Background}">
+                            <Grid>
+                                <!--<Grid.LayoutTransform>
+                                    <ScaleTransform x:Name="ApplicationScaleTransform"
+                                CenterX="0"
+                                CenterY="0"
+                                ScaleX="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:MoveableWindow}, Path=ScaleValue}"
+                                ScaleY="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:MoveableWindow}, Path=ScaleValue}" />
+                                </Grid.LayoutTransform>-->
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <!-- This is the application title window frame -->
+                                <Border CornerRadius="10,10,0,0" Background="{StaticResource MoveableWindow.TitleBackground}" Height="{StaticResource MoveableWindow.TitleBarHeight}" Padding="0">
+                                    <!--<Border.OpacityMask>
+                                        <VisualBrush Visual="{Binding ElementName=MainBorder}" />
+                                    </Border.OpacityMask>-->
+                                    <Border.Resources>
+                                        <!--<converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>-->
+                                    </Border.Resources>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- This is the application icon and the application title. They are on the left side. -->
+                                        <StackPanel Orientation="Horizontal" Margin="12,4,8,4">
+                                            <Image Source="{Binding IconImageSource}" Width="20" Height="20" Opacity=".7"/>
+                                            <Separator Width="8" Background="Transparent"/>
+                                            <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type controls:MoveableWindow}}, Path=Title}" 
+                                                   Style="{StaticResource MoveableWindowBaseTitleStyle}"/>
+                                        </StackPanel>
+
+                                        <!-- This ContentControl and the stack panel underneath are the move bar for the window -->
+                                        <ContentControl x:Name="MoveControl" Grid.Column="1" KeyboardNavigation.IsTabStop="False">
+                                            <Border Margin="0,0" Background="Transparent" Grid.Column="1"
+                                            BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                            </Border>
+                                        </ContentControl>
+
+                                        <!-- This is the window frame button for close -->
+                                        <StackPanel Orientation="Horizontal" Grid.Column="2">
+                                            <!--<controls:RoundedCornerButton Style="{StaticResource MoveableWindowIconButtonStyle}" IconGlyph="{StaticResource SegoeFluentChromeMinimizeGlyph}"
+                                                      Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:MoveableWindow}, Path=MinimizeCommand}"
+                                                      KeyboardNavigation.IsTabStop="False"/>
+                                            <controls:RoundedCornerButton Style="{StaticResource MoveableWindowIconButtonStyle}" IconGlyph="{StaticResource SegoeFluentChromeMaximizeGlyph}"
+                                                      Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:MoveableWindow}, Path=MaximizeCommand}"
+                                                       Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:MoveableWindow}, Path=WindowState,
+                                                            Converter={StaticResource WindowStateToVisibilityConverter},  ConverterParameter={x:Static WindowState.Normal}}"
+                                                            IsEnabled="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:MoveableWindow}, Path=Resizable}"
+                                                        KeyboardNavigation.IsTabStop="False"/>
+                                            <controls:RoundedCornerButton Style="{StaticResource MoveableWindowIconButtonStyle}" IconGlyph="{StaticResource SegoeFluentChromeRestoreGlyph}" 
+                                                      Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:MoveableWindow}, Path=OverlapCommand}"
+                                                       Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:MoveableWindow}, Path=WindowState,
+                                                            Converter={StaticResource WindowStateToVisibilityConverter},  ConverterParameter={x:Static WindowState.Maximized}}"
+                                                            IsEnabled="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:MoveableWindow}, Path=Resizable}"
+                                                                      KeyboardNavigation.IsTabStop="False"/>
+                                            <controls:RoundedCornerButton Style="{StaticResource MoveableWindowIconButtonStyle}" IconGlyph="{StaticResource SegoeFluentChromeCloseGlyph}"
+                                                      Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:MoveableWindow}, Path=CloseCommand}"
+                                                      CornerRadius="0,10,0,0" KeyboardNavigation.IsTabStop="False"/>-->
+                                        </StackPanel>
+
+                                    </Grid>
+                                </Border>
+
+                                <!-- This is our main content area -->
+                                <Border Grid.Row="1" CornerRadius="0,0,10,10" Padding="0">
+                                    <AdornerDecorator>
+                                        <ContentPresenter/>
+                                    </AdornerDecorator>
+                                </Border>
+
+                                <!-- This is the Window Frame area. This is where the resize borders are described -->
+                                <Path x:Name="Resize_NW" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource BorderPathStyle}"
+                                    Stroke="Transparent" StrokeThickness="4" Margin="0" Cursor="SizeNWSE">
+                                    <Path.Data>
+                                        <PathGeometry>
+                                            <PathGeometry.Figures>
+                                                <PathFigureCollection>
+                                                    <PathFigure StartPoint="2,10">
+                                                        <PathFigure.Segments>
+                                                            <PathSegmentCollection>
+                                                                <QuadraticBezierSegment Point1="2,2" Point2="10,2" />
+                                                            </PathSegmentCollection>
+                                                        </PathFigure.Segments>
+                                                    </PathFigure>
+                                                </PathFigureCollection>
+                                            </PathGeometry.Figures>
+                                        </PathGeometry>
+                                    </Path.Data>
+                                </Path>
+                                <Path x:Name="Resize_NE" VerticalAlignment="Top" HorizontalAlignment="Right"  Style="{StaticResource BorderPathStyle}"
+                                    Stroke="Transparent" StrokeThickness="5" Margin="0,0,0,0" Cursor="SizeNESW">
+                                    <Path.Data>
+                                        <PathGeometry>
+                                            <PathGeometry.Figures>
+                                                <PathFigureCollection>
+                                                    <PathFigure StartPoint="0,2">
+                                                        <PathFigure.Segments>
+                                                            <PathSegmentCollection>
+                                                                <QuadraticBezierSegment Point1="10,2" Point2="10,12" />
+                                                            </PathSegmentCollection>
+                                                        </PathFigure.Segments>
+                                                    </PathFigure>
+                                                </PathFigureCollection>
+                                            </PathGeometry.Figures>
+                                        </PathGeometry>
+                                    </Path.Data>
+                                </Path>
+                                <Path x:Name="Resize_SE" VerticalAlignment="Bottom" HorizontalAlignment="Right" Cursor="SizeNWSE"  Style="{StaticResource BorderPathStyle}"
+                                Stroke="Transparent" StrokeThickness="5" Margin="0" Grid.RowSpan="3">
+                                    <Path.Data>
+                                        <PathGeometry>
+                                            <PathGeometry.Figures>
+                                                <PathFigureCollection>
+                                                    <PathFigure StartPoint="10,2">
+                                                        <PathFigure.Segments>
+                                                            <PathSegmentCollection>
+                                                                <QuadraticBezierSegment Point1="10,10" Point2="2,10" />
+                                                            </PathSegmentCollection>
+                                                        </PathFigure.Segments>
+                                                    </PathFigure>
+                                                </PathFigureCollection>
+                                            </PathGeometry.Figures>
+                                        </PathGeometry>
+                                    </Path.Data>
+                                </Path>
+                                <Path x:Name="Resize_SW" VerticalAlignment="Bottom" HorizontalAlignment="Left" Cursor="SizeNESW"  Style="{StaticResource BorderPathStyle}"
+                                Stroke="Transparent" StrokeThickness="5" Margin="0,0,0,0" Grid.RowSpan="3">
+                                    <Path.Data>
+                                        <PathGeometry>
+                                            <PathGeometry.Figures>
+                                                <PathFigureCollection>
+                                                    <PathFigure StartPoint="1,2">
+                                                        <PathFigure.Segments>
+                                                            <PathSegmentCollection>
+                                                                <QuadraticBezierSegment Point1="1,10" Point2="10,11" />
+                                                            </PathSegmentCollection>
+                                                        </PathFigure.Segments>
+                                                    </PathFigure>
+                                                </PathFigureCollection>
+                                            </PathGeometry.Figures>
+                                        </PathGeometry>
+                                    </Path.Data>
+                                </Path>
+                                <Rectangle x:Name="Resize_N" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="9,0,9,0"  Style="{StaticResource BorderRectangleStyle}"
+                                    Height="4" Fill="Transparent" Cursor="SizeNS">
+                                </Rectangle>
+                                <Rectangle x:Name="Resize_S" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"   Style="{StaticResource BorderRectangleStyle}"
+                                    Margin="9,0,9,0" Height="4" Fill="Transparent" Grid.RowSpan="3" Cursor="SizeNS">
+                                </Rectangle>
+                                <Rectangle x:Name="Resize_W" VerticalAlignment="Stretch" HorizontalAlignment="Left"   Style="{StaticResource BorderRectangleStyle}"
+                                Margin="0,9,0,9" Width="4" Fill="Transparent" Grid.RowSpan="3" Cursor="SizeWE">
+                                </Rectangle>
+                                <Rectangle x:Name="Resize_E" VerticalAlignment="Stretch" HorizontalAlignment="Right"   Style="{StaticResource BorderRectangleStyle}"
+                                    Margin="0,9,0,9" Width="4" Fill="Transparent" Grid.RowSpan="3"  Cursor="SizeWE">
+                                </Rectangle>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Window.ResizeMode"
+                     Value="CanResizeWithGrip">
+                <Setter Property="Template"
+                        Value="{StaticResource WindowTemplateKey}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>
