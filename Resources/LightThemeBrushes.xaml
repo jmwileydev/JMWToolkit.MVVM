@@ -1,0 +1,56 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <!--
+    // We define the primary color and the surface color. We also supply various shades and tints to be
+    // used for the various control pieces we define.
+    -->
+    <Color x:Key="PrimaryShade4">#1c3015</Color>
+    <Color x:Key="PrimaryShade3">#253e1d</Color>
+    <Color x:Key="PrimaryShade2">#2e4b25</Color>
+    <Color x:Key="PrimaryShade1">#37592d</Color>
+    <Color x:Key="Primary">#416835</Color>
+    <Color x:Key="PrimaryTint1">#537648</Color>
+    <Color x:Key="PrimaryTint2">#65855b</Color>
+    <Color x:Key="PrimaryTint3">#77936f</Color>
+    <Color x:Key="PrimaryTint4">#89a282</Color>
+    <Color x:Key="OnPrimary">#ffffff</Color>
+    <Color x:Key="OnPrimaryShade">#dedede</Color>
+
+    <Color x:Key="Surface">#f8faf0</Color>
+    <Color x:Key="SurfaceShade1">#d8d9d1</Color>
+    <Color x:Key="SurfaceShade2">#b8bab2</Color>
+
+
+    <SolidColorBrush x:Key="MoveableWindow.TitleForeground" Color="{StaticResource Primary}"/>
+    <SolidColorBrush x:Key="MoveableWindow.TitleDisabledForeground" Color="{StaticResource PrimaryShade2}"/>
+    <SolidColorBrush x:Key="MoveableWindow.Background" Color="{StaticResource Surface}"/>
+    <SolidColorBrush x:Key="MoveableWindow.TitleBackground" Color="{StaticResource SurfaceShade1}"/>
+    <SolidColorBrush x:Key="MoveableWindow.BorderBrush" Color="{StaticResource Primary}"/>
+
+
+
+    <Color x:Key="RoundedCornerButton.Background">#416835</Color>
+    <Color x:Key="RoundedCornerButton.Background.MouseOver">#537648</Color>
+    <Color x:Key="RoundedCornerButton.Background.Pressed">#65855b</Color>
+    <Color x:Key="RoundedCornerButton.Background.Disabled">#77936f</Color>
+    <Color x:Key="RoundedCornerButton.Foreground">#ffffff</Color>
+    <Color x:Key="RoundedCornerButton.Foreground.Disabled">#dedede</Color>
+    <Color x:Key="RoundedCornerButton.LightBorder">Transparent</Color>
+    <Color x:Key="RoundedCornerButton.DarkBorder">Transparent</Color>
+    <Color x:Key="RoundedCornerButton.MouseOverLightBorder">#89a282</Color>
+    <Color x:Key="RoundedCornerButton.MouseOverDarkBorder">#65855b</Color>
+    
+    <SolidColorBrush x:Key="RoundedCornerButton.Background.Brush" Color="{StaticResource Primary}"/>
+    <SolidColorBrush x:Key="RoundedCornerButton.Background.MouseOver.Brush" Color="{StaticResource PrimaryTint1}"/>
+    <SolidColorBrush x:Key="RoundedCornerButton.Background.Pressed.Brush" Color="{StaticResource PrimaryTint2}"/>
+    <SolidColorBrush x:Key="RoundedCornerButton.Background.Disabled.Brush" Color="{StaticResource PrimaryTint3}"/>
+    <SolidColorBrush x:Key="RoundedCornerButton.Foreground.Brush" Color="{StaticResource OnPrimary}"/>
+    <SolidColorBrush x:Key="RoundedCornerButton.Foreground.Disabled.Brush" Color="{StaticResource OnPrimaryShade}"/>
+    <SolidColorBrush x:Key="RoundedCornerButton.LightBorder.Brush" Color="Transparent"/>
+    <SolidColorBrush x:Key="RoundedCornerButton.DarkBorder.Brush" Color="Transparent"/>
+    <SolidColorBrush x:Key="RoundedCornerButton.MouseOverLightBorder.Brush" Color="{StaticResource PrimaryTint4}"/>
+    <SolidColorBrush x:Key="RoundedCornerButton.MouseOverDarkBorder.Brush" Color="{StaticResource PrimaryTint2}"/>
+
+</ResourceDictionary>

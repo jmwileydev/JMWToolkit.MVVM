@@ -3,11 +3,6 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <SolidColorBrush x:Key="MoveableWindow.TitleForeground" Color="#416835"/>
-    <SolidColorBrush x:Key="MoveableWindow.TitleDisabledForeground" Color="#77936f"/>
-    <SolidColorBrush x:Key="MoveableWindow.Background" Color="#f8faf0"/>
-    <SolidColorBrush x:Key="MoveableWindow.TitleBackground" Color="#d8dbd1"/>
-    <SolidColorBrush x:Key="MoveableWindow.BorderBrush" Color="#416835"/>
     <system:Double x:Key="MoveableWindow.TitleBarHeight">25</system:Double>
 
     <Style x:Key="MoveableWindowBaseTitleStyle" TargetType="TextBlock">
@@ -15,7 +10,7 @@
         <Setter Property="Margin" Value="0,0,0,0"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{StaticResource MoveableWindow.TitleForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MoveableWindow.TitleForeground}"/>
     </Style>
 
     <!--<Style x:Key="MoveableWindowIconButtonStyle" BasedOn="{StaticResource IconButtonStyle}" TargetType="controls:RoundedCornerButton">
@@ -82,8 +77,8 @@
                         <Grid.OpacityMask>
                             <VisualBrush Visual="{Binding ElementName=MainBorder}" />
                         </Grid.OpacityMask>
-                        <Border x:Name="MainBorder" BorderThickness="1" BorderBrush="{StaticResource MoveableWindow.TitleForeground}" CornerRadius="10,10,10,10"
-                            Background="{StaticResource MoveableWindow.Background}">
+                        <Border x:Name="MainBorder" BorderThickness="1" BorderBrush="{DynamicResource MoveableWindow.TitleForeground}" CornerRadius="10,10,10,10"
+                            Background="{DynamicResource MoveableWindow.Background}">
                             <Grid>
                                 <!--<Grid.LayoutTransform>
                                     <ScaleTransform x:Name="ApplicationScaleTransform"
@@ -98,7 +93,7 @@
                                 </Grid.RowDefinitions>
 
                                 <!-- This is the application title window frame -->
-                                <Border CornerRadius="10,10,0,0" Background="{StaticResource MoveableWindow.TitleBackground}" Height="{StaticResource MoveableWindow.TitleBarHeight}" Padding="0">
+                                <Border CornerRadius="10,10,0,0" Background="{DynamicResource MoveableWindow.TitleBackground}" Height="{DynamicResource MoveableWindow.TitleBarHeight}" Padding="0">
                                     <!--<Border.OpacityMask>
                                         <VisualBrush Visual="{Binding ElementName=MainBorder}" />
                                     </Border.OpacityMask>-->
@@ -117,7 +112,7 @@
                                             <Image Source="{Binding IconImageSource}" Width="20" Height="20" Opacity=".7"/>
                                             <Separator Width="8" Background="Transparent"/>
                                             <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type controls:MoveableWindow}}, Path=Title}" 
-                                                   Style="{StaticResource MoveableWindowBaseTitleStyle}"/>
+                                                   Style="{DynamicResource MoveableWindowBaseTitleStyle}"/>
                                         </StackPanel>
 
                                         <!-- This ContentControl and the stack panel underneath are the move bar for the window -->
