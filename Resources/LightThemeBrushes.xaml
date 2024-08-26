@@ -29,8 +29,6 @@
     <SolidColorBrush x:Key="MoveableWindow.TitleBackground" Color="{DynamicResource SurfaceShade1}"/>
     <SolidColorBrush x:Key="MoveableWindow.BorderBrush" Color="{DynamicResource Primary}"/>
 
-
-
     <Color x:Key="RoundedCornerButton.Background">#416835</Color>
     <Color x:Key="RoundedCornerButton.Background.MouseOver">#537648</Color>
     <Color x:Key="RoundedCornerButton.Background.Pressed">#65855b</Color>
