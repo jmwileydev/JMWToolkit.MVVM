@@ -1,14 +1,19 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
                     xmlns:controls="clr-namespace:JMWToolkit.MVVM.Controls">
 
+    <system:Double x:Key="RoundedCornerButtonRadius">8</system:Double>
+    <CornerRadius x:Key="RoundedCornerButtonCornerRadius" 
+                  BottomLeft="{StaticResource RoundedCornerButtonRadius}" BottomRight="{StaticResource RoundedCornerButtonRadius}"
+                  TopLeft="{StaticResource RoundedCornerButtonRadius}" TopRight="{StaticResource RoundedCornerButtonRadius}"/>
     <!-- FocusVisual -->
     <Style x:Key="ButtonFocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate>
                     <Border>
-                        <Rectangle Margin="-1" StrokeThickness="1" Stroke="#80000000" StrokeDashArray="1 2" RadiusX="10" RadiusY="10"/>
+                        <Rectangle Margin="-1" StrokeThickness="1" Stroke="#80000000" StrokeDashArray="1 2" RadiusX="{DynamicResource RoundedCornerButtonRadius}" RadiusY="{DynamicResource RoundedCornerButtonRadius}"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -25,13 +30,13 @@
         <Setter Property="Foreground" Value="{DynamicResource RoundedCornerButton.Foreground.Brush}"/>
         <Setter Property="Background" Value="{DynamicResource RoundedCornerButton.Background.Brush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource RoundedCornerButtonCornerRadius}"/>
         <Setter Property="Padding" Value="10,6"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:RoundedCornerButton">
                     <Border TextBlock.Foreground="{TemplateBinding Foreground}" x:Name="Border" CornerRadius="{TemplateBinding CornerRadius}"
-                            BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                            BorderThickness="{TemplateBinding BorderThickness}">
                         <Border.BorderBrush>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                                 <LinearGradientBrush.GradientStops>
@@ -42,7 +47,9 @@
                                 </LinearGradientBrush.GradientStops>
                             </LinearGradientBrush>
                         </Border.BorderBrush>
-
+                        <Border.Background>
+                            <SolidColorBrush Color="{DynamicResource RoundedCornerButton.Background}"/>
+                        </Border.Background>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualStateGroup.Transitions>

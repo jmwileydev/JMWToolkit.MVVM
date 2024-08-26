@@ -23,11 +23,11 @@
     <Color x:Key="SurfaceShade2">#b8bab2</Color>
 
 
-    <SolidColorBrush x:Key="MoveableWindow.TitleForeground" Color="{StaticResource Primary}"/>
-    <SolidColorBrush x:Key="MoveableWindow.TitleDisabledForeground" Color="{StaticResource PrimaryShade2}"/>
-    <SolidColorBrush x:Key="MoveableWindow.Background" Color="{StaticResource Surface}"/>
-    <SolidColorBrush x:Key="MoveableWindow.TitleBackground" Color="{StaticResource SurfaceShade1}"/>
-    <SolidColorBrush x:Key="MoveableWindow.BorderBrush" Color="{StaticResource Primary}"/>
+    <SolidColorBrush x:Key="MoveableWindow.TitleForeground" Color="{DynamicResource Primary}"/>
+    <SolidColorBrush x:Key="MoveableWindow.TitleDisabledForeground" Color="{DynamicResource PrimaryShade2}"/>
+    <SolidColorBrush x:Key="MoveableWindow.Background" Color="{DynamicResource Surface}"/>
+    <SolidColorBrush x:Key="MoveableWindow.TitleBackground" Color="{DynamicResource SurfaceShade1}"/>
+    <SolidColorBrush x:Key="MoveableWindow.BorderBrush" Color="{DynamicResource Primary}"/>
 
 
 
@@ -41,16 +41,16 @@
     <Color x:Key="RoundedCornerButton.DarkBorder">Transparent</Color>
     <Color x:Key="RoundedCornerButton.MouseOverLightBorder">#89a282</Color>
     <Color x:Key="RoundedCornerButton.MouseOverDarkBorder">#65855b</Color>
-    
-    <SolidColorBrush x:Key="RoundedCornerButton.Background.Brush" Color="{StaticResource Primary}"/>
-    <SolidColorBrush x:Key="RoundedCornerButton.Background.MouseOver.Brush" Color="{StaticResource PrimaryTint1}"/>
-    <SolidColorBrush x:Key="RoundedCornerButton.Background.Pressed.Brush" Color="{StaticResource PrimaryTint2}"/>
-    <SolidColorBrush x:Key="RoundedCornerButton.Background.Disabled.Brush" Color="{StaticResource PrimaryTint3}"/>
-    <SolidColorBrush x:Key="RoundedCornerButton.Foreground.Brush" Color="{StaticResource OnPrimary}"/>
-    <SolidColorBrush x:Key="RoundedCornerButton.Foreground.Disabled.Brush" Color="{StaticResource OnPrimaryShade}"/>
-    <SolidColorBrush x:Key="RoundedCornerButton.LightBorder.Brush" Color="Transparent"/>
-    <SolidColorBrush x:Key="RoundedCornerButton.DarkBorder.Brush" Color="Transparent"/>
-    <SolidColorBrush x:Key="RoundedCornerButton.MouseOverLightBorder.Brush" Color="{StaticResource PrimaryTint4}"/>
-    <SolidColorBrush x:Key="RoundedCornerButton.MouseOverDarkBorder.Brush" Color="{StaticResource PrimaryTint2}"/>
+
+    <SolidColorBrush x:Key="RoundedCornerButton.Background.Brush" Color="{DynamicResource RoundedCornerButton.Background}"/>
+    <SolidColorBrush x:Key="RoundedCornerButton.Background.MouseOver.Brush" Color="{DynamicResource RoundedCornerButton.Background.MouseOver}"/>
+    <SolidColorBrush x:Key="RoundedCornerButton.Background.Pressed.Brush" Color="{DynamicResource RoundedCornerButton.Background.Pressed}"/>
+    <SolidColorBrush x:Key="RoundedCornerButton.Background.Disabled.Brush" Color="{DynamicResource RoundedCornerButton.Background.Disabled}"/>
+    <SolidColorBrush x:Key="RoundedCornerButton.Foreground.Brush" Color="{DynamicResource OnPrimary}"/>
+    <SolidColorBrush x:Key="RoundedCornerButton.Foreground.Disabled.Brush" Color="{DynamicResource OnPrimaryShade}"/>
+    <SolidColorBrush x:Key="RoundedCornerButton.LightBorder.Brush" Color="{DynamicResource RoundedCornerButton.LightBorder}"/>
+    <SolidColorBrush x:Key="RoundedCornerButton.DarkBorder.Brush" Color="{DynamicResource RoundedCornerButton.LightBorder}"/>
+    <SolidColorBrush x:Key="RoundedCornerButton.MouseOverLightBorder.Brush" Color="{DynamicResource PrimaryTint4}"/>
+    <SolidColorBrush x:Key="RoundedCornerButton.MouseOverDarkBorder.Brush" Color="{DynamicResource PrimaryTint2}"/>
 
 </ResourceDictionary>
