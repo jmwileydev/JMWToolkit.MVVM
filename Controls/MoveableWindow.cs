@@ -4,6 +4,7 @@ using JMWToolkit.MVVM.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
@@ -27,7 +28,7 @@ enum ResizeDirection
 }
 
 /// <summary>
-/// Descendent of the System.Windows.Window class which adds a customizable toolbar and eventing to help the ViewModels.
+/// Descendent of the System.Windows.Window class which adds a customizable toolbar and events to help the ViewModels.
 /// </summary>
 public class MoveableWindow : Window
 {
@@ -62,10 +63,10 @@ public class MoveableWindow : Window
 
         Loaded += MoveableWindow_Loaded;
         LocationChanged += MoveableWindow_LocationChanged;
-        CloseCommand = new RelayCommand(() => Close(), () => Closeable);
-        MinimizeCommand = new RelayCommand(() => WindowState = WindowState.Minimized, () => WindowState != WindowState.Minimized);
-        MaximizeCommand = new RelayCommand(() => WindowState = WindowState.Maximized, () => WindowState != WindowState.Maximized);
-        OverlapCommand = new RelayCommand(() => WindowState = WindowState.Normal, () => WindowState == WindowState.Maximized);
+        SetValue(CloseCommandPropertyKey, new RelayCommand(() => Close(), () => Closeable));
+        SetValue(MinimizeCommandPropertyKey,  new RelayCommand(() => WindowState = WindowState.Minimized, () => WindowState != WindowState.Minimized));
+        SetValue(MaximizeCommandPropertyKey, new RelayCommand(() => WindowState = WindowState.Maximized, () => WindowState != WindowState.Maximized));
+        SetValue(OverlapCommandPropertyKey, new RelayCommand(() => WindowState = WindowState.Normal, () => WindowState == WindowState.Maximized));
 
         _mouseDoubleClickTime = TimeSpan.FromMilliseconds(NativeHelpers.GetDoubleClickTime());
     }
@@ -86,7 +87,7 @@ public class MoveableWindow : Window
         info.MonitorRect.Right = 100;
         info.MonitorRect.Left = 10;
 
-        NativeHelpers.GetMonitorInfo(_currentMonitor, out info);
+        _ = NativeHelpers.GetMonitorInfo(_currentMonitor, out info);
 
         if (_mainBorder != null)
         {
@@ -131,7 +132,6 @@ public class MoveableWindow : Window
 
     private void EnumerateNamedVisualChildren(FrameworkElement root)
     {
-        Dictionary<string, FrameworkElement> childMap = [];
         Queue<FrameworkElement> visuals = [];
         visuals.Enqueue(root);
 
@@ -213,9 +213,34 @@ public class MoveableWindow : Window
 
     private void ViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == "CloseWindow")
+        switch(e.PropertyName)
         {
-            Close();
+            case "CloseWindow":
+                Close();
+                break;
+
+            case "Closeable":
+                {
+                    if (DataContext is MoveableWindowViewModel w)
+                    {
+                        Closeable = w.Closeable;
+                        CloseCommand?.NotifyCanExecuteChanged();
+
+                    }
+                }
+                break;
+
+            case "Resizable":
+                {
+                    if (DataContext is MoveableWindowViewModel w)
+                    {
+                        Resizable = w.Resizable;
+                        MinimizeCommand?.NotifyCanExecuteChanged();
+                        MaximizeCommand?.NotifyCanExecuteChanged();
+                        OverlapCommand?.NotifyCanExecuteChanged();
+                    }
+                }
+                break;
         }
     }
 
@@ -318,44 +343,64 @@ public class MoveableWindow : Window
     /// <summary>
     /// The dependency property for Closable.
     /// </summary>
-    public static readonly DependencyProperty CloseableProperty =
+    internal static readonly DependencyProperty CloseableProperty =
         DependencyProperty.Register("Closeable", typeof(bool), typeof(MoveableWindow), new PropertyMetadata(true));
 
-    public ICommand? CloseCommand
+    /// <summary>
+    /// Gets the CloseCommand which is used to close the window.
+    /// </summary>
+    public IRelayCommand CloseCommand
     {
-        get { return (ICommand)GetValue(CloseCommandProperty); }
-        set { SetValue(CloseCommandProperty, value); }
+        get { return (IRelayCommand)GetValue(CloseCommandPropertyKey.DependencyProperty); }
     }
 
-    public static readonly DependencyProperty CloseCommandProperty =
-        DependencyProperty.Register("CloseCommand", typeof(ICommand), typeof(MoveableWindow), new PropertyMetadata(null));
+    /// <summary>
+    /// CloseCommand dependency property.
+    /// </summary>
+    public static readonly DependencyPropertyKey CloseCommandPropertyKey =
+        DependencyProperty.RegisterReadOnly("CloseCommand", typeof(IRelayCommand), typeof(MoveableWindow), new FrameworkPropertyMetadata());
 
-    public ICommand? MinimizeCommand
+    /// <summary>
+    /// Gets the minimize command which can be used to minimize the window.
+    /// </summary>
+    public IRelayCommand? MinimizeCommand
     {
-        get { return (ICommand)GetValue(MinimizeCommandProperty); }
-        set { SetValue(MinimizeCommandProperty, value); }
+        get { return (IRelayCommand)GetValue(MinimizeCommandPropertyKey.DependencyProperty); }
     }
 
-    public static readonly DependencyProperty MinimizeCommandProperty =
-        DependencyProperty.Register("MinimizeCommand", typeof(ICommand), typeof(MoveableWindow), new PropertyMetadata(null));
+    /// <summary>
+    /// Dependency property for the MinimizeCommand
+    /// </summary>
+    internal static readonly DependencyPropertyKey MinimizeCommandPropertyKey =
+        DependencyProperty.RegisterReadOnly("MinimizeCommand", typeof(IRelayCommand), typeof(MoveableWindow), new FrameworkPropertyMetadata());
 
-    public ICommand? MaximizeCommand
+    /// <summary>
+    /// Gets the maximize command which can be used to minimize the window.
+    /// </summary>
+    public IRelayCommand? MaximizeCommand
     {
-        get { return (ICommand)GetValue(MaximizeCommandProperty); }
-        set { SetValue(MaximizeCommandProperty, value); }
+        get { return (IRelayCommand)GetValue(MaximizeCommandPropertyKey.DependencyProperty); }
     }
 
-    public static readonly DependencyProperty MaximizeCommandProperty =
-        DependencyProperty.Register("MaximizeCommand", typeof(ICommand), typeof(MoveableWindow), new PropertyMetadata(null));
+    /// <summary>
+    /// Dependency property for the MaximizeCommand.
+    /// </summary>
+    internal static readonly DependencyPropertyKey MaximizeCommandPropertyKey =
+        DependencyProperty.RegisterReadOnly("MaximizeCommand", typeof(IRelayCommand), typeof(MoveableWindow), new FrameworkPropertyMetadata());
 
-    public ICommand? OverlapCommand
+    /// <summary>
+    /// Gets the overlap command which can be used to restore the window.
+    /// </summary>
+    public IRelayCommand? OverlapCommand
     {
-        get { return (ICommand)GetValue(OverlapCommandProperty); }
-        set { SetValue(OverlapCommandProperty, value); }
+        get { return (IRelayCommand)GetValue(OverlapCommandPropertyKey.DependencyProperty); }
     }
 
-    public static readonly DependencyProperty OverlapCommandProperty =
-        DependencyProperty.Register("OverlapCommand", typeof(ICommand), typeof(MoveableWindow), new PropertyMetadata(null));
+    /// <summary>
+    /// Dependency property for the OverlapCommand.
+    /// </summary>
+    internal static readonly DependencyPropertyKey OverlapCommandPropertyKey =
+        DependencyProperty.RegisterReadOnly("OverlapCommand", typeof(IRelayCommand), typeof(MoveableWindow), new FrameworkPropertyMetadata());
     #endregion
 
     #region WindowResizeRegion

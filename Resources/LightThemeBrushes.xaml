@@ -17,15 +17,14 @@
     <Color x:Key="PrimaryTint4">#89a282</Color>
     <Color x:Key="OnPrimary">#ffffff</Color>
     <Color x:Key="OnPrimaryShade">#dedede</Color>
-
     <Color x:Key="Surface">#f8faf0</Color>
     <Color x:Key="SurfaceShade1">#d8d9d1</Color>
     <Color x:Key="SurfaceShade2">#b8bab2</Color>
 
-
     <SolidColorBrush x:Key="MoveableWindow.TitleForeground" Color="{DynamicResource Primary}"/>
-    <SolidColorBrush x:Key="MoveableWindow.TitleDisabledForeground" Color="{DynamicResource PrimaryShade2}"/>
+    <SolidColorBrush x:Key="MoveableWindow.TitleDisabledForeground" Color="{DynamicResource PrimaryTint4}"/>
     <SolidColorBrush x:Key="MoveableWindow.Background" Color="{DynamicResource Surface}"/>
+    <SolidColorBrush x:Key="MoveableWindow.Foreground" Color="{DynamicResource Primary}"/>
     <SolidColorBrush x:Key="MoveableWindow.TitleBackground" Color="{DynamicResource SurfaceShade1}"/>
     <SolidColorBrush x:Key="MoveableWindow.BorderBrush" Color="{DynamicResource Primary}"/>
 
@@ -39,6 +38,7 @@
     <Color x:Key="RoundedCornerButton.DarkBorder">Transparent</Color>
     <Color x:Key="RoundedCornerButton.MouseOverLightBorder">#89a282</Color>
     <Color x:Key="RoundedCornerButton.MouseOverDarkBorder">#65855b</Color>
+    <Color x:Key="RoundedCornerButton.DefaultBorderColor">#5C3568</Color>
 
     <SolidColorBrush x:Key="RoundedCornerButton.Background.Brush" Color="{DynamicResource RoundedCornerButton.Background}"/>
     <SolidColorBrush x:Key="RoundedCornerButton.Background.MouseOver.Brush" Color="{DynamicResource RoundedCornerButton.Background.MouseOver}"/>

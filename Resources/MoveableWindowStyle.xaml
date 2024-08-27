@@ -33,7 +33,8 @@
                 <ControlTemplate TargetType="{x:Type  controls:RoundedCornerButton}">
                     <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" Padding="8,0" VerticalAlignment="Stretch"
                             BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true" CornerRadius="{TemplateBinding CornerRadius}">
-                        <ContentPresenter x:Name="content" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True" />
+                        <ContentPresenter x:Name="content" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"
+                                          TextBlock.Foreground="{DynamicResource MoveableWindow.TitleForeground}"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <!--<Trigger Property="IsDefaulted" Value="true">
@@ -46,11 +47,9 @@
                         <Trigger Property="IsPressed" Value="true">
                             <Setter Property="Background" TargetName="border" Value="#40000000"/>
                         </Trigger>
-                        <!--<Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Background" TargetName="border" Value="{DynamicResource IconButton.Disabled.BackgroundBrush}"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource IconButton.Disabled.BorderBrush}"/>
-                            <Setter Property="TextElement.Foreground" TargetName="textBlock" Value="{StaticResource WindowIconButtonDisabledForeground}"/>
-                        </Trigger>-->
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="TextElement.Foreground" TargetName="content" Value="{DynamicResource MoveableWindow.TitleDisabledForeground}"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

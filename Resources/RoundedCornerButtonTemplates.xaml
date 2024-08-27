@@ -13,7 +13,7 @@
             <Setter.Value>
                 <ControlTemplate>
                     <Border>
-                        <Rectangle Margin="-1" StrokeThickness="1" Stroke="#80000000" StrokeDashArray="1 2" RadiusX="{DynamicResource RoundedCornerButtonRadius}" RadiusY="{DynamicResource RoundedCornerButtonRadius}"/>
+                        <Rectangle Margin="2" StrokeThickness="1" Stroke="#C0FFFFFF" StrokeDashArray="1 2" RadiusX="{DynamicResource RoundedCornerButtonRadius}" RadiusY="{DynamicResource RoundedCornerButtonRadius}"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -109,13 +109,14 @@
                                     <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                                         <GradientBrush.GradientStops>
                                             <GradientStopCollection>
-                                                <GradientStop Color="{DynamicResource RoundedCornerButton.LightBorder}" Offset="2.0" />
-                                                <GradientStop Color="{DynamicResource RoundedCornerButton.DarkBorder}" Offset="2.0" />
+                                                <GradientStop Color="{DynamicResource RoundedCornerButton.DefaultBorderColor}" Offset="0.0" />
+                                                <GradientStop Color="{DynamicResource RoundedCornerButton.DefaultBorderColor}" Offset="1.0" />
                                             </GradientStopCollection>
                                         </GradientBrush.GradientStops>
                                     </LinearGradientBrush>
                                 </Setter.Value>
                             </Setter>
+                            <Setter TargetName="Border" Property="BorderThickness" Value="1"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

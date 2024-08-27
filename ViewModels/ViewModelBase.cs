@@ -30,7 +30,7 @@ public class ViewModelBase : ObservableObject
     /// <param name="e"></param>
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
-        base.OnPropertyChanged(e.PropertyName);
+        base.OnPropertyChanged(e);
 
         if (e.PropertyName != null && _propertiesToCommands.TryGetValue(e.PropertyName, out List<IRelayCommand>? commands))
         {
