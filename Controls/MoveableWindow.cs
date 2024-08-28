@@ -2,14 +2,11 @@
 using JMWToolkit.MVVM.Helpers;
 using JMWToolkit.MVVM.ViewModels;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Interop;
 using System.Windows.Media;
 
 namespace JMWToolkit.MVVM.Controls;
@@ -19,7 +16,6 @@ namespace JMWToolkit.MVVM.Controls;
 /// </summary>
 public class MoveableWindow : Window
 {
-    private static IntPtr _currentMonitor;
     private ContentControl? _moveControl;
     private bool _isMoving = false;
     private Point _moveStartPoint;
@@ -47,7 +43,6 @@ public class MoveableWindow : Window
         };
 
         Loaded += MoveableWindow_Loaded;
-        LocationChanged += MoveableWindow_LocationChanged;
         SetValue(CloseCommandPropertyKey, new RelayCommand(() => Close(), () => Closeable));
 
         SetValue(MinimizeCommandPropertyKey,  new RelayCommand(() => WindowState = WindowState.Minimized, () => WindowState != WindowState.Minimized && ResizeMode != ResizeMode.NoResize));
@@ -80,27 +75,6 @@ public class MoveableWindow : Window
             MinimizeCommand?.NotifyCanExecuteChanged();
             MaximizeCommand?.NotifyCanExecuteChanged();
             OverlapCommand?.NotifyCanExecuteChanged();
-        }
-    }
-
-    private void SetMaxHeight()
-    {
-        var info = new NativeHelpers.MonitorInfo();
-        info.MonitorRect.Right = 100;
-        info.MonitorRect.Left = 10;
-
-        _ = NativeHelpers.GetMonitorInfo(_currentMonitor, out info);
-    }
-
-    private void MoveableWindow_LocationChanged(object? sender, EventArgs e)
-    {
-        var monitor = NativeHelpers.MonitorFromWindow(new WindowInteropHelper(this).EnsureHandle(), NativeHelpers.MONITOR_DEFAULTTONEAREST);
-        if (monitor != _currentMonitor)
-        {
-            // Whenever we switch monitors our maximum width/height need to change based on the new monitor.
-            _currentMonitor = monitor;
-            SetMaxHeight();
-
         }
     }
 

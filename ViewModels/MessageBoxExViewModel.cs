@@ -6,7 +6,6 @@ This source code is licensed under the BSD-style license found in the
 LICENSE file in the root directory of this source tree. 
 */
 using CommunityToolkit.Mvvm.Input;
-using JMWToolkit.MVVM.ViewModels;
 using System;
 using System.Drawing;
 using System.Windows;
@@ -17,7 +16,7 @@ using Image = System.Windows.Controls.Image;
 
 namespace JMWToolkit.MVVM.ViewModels;
 
-internal class MessageBoxExViewModel : ViewModelBase
+internal class MessageBoxExViewModel : MoveableWindowViewModel
 {
     internal MessageBoxExViewModel(
         String caption,
