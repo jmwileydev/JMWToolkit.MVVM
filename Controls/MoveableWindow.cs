@@ -2,11 +2,10 @@
 using JMWToolkit.MVVM.Helpers;
 using JMWToolkit.MVVM.ViewModels;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
 using System.Diagnostics;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -15,32 +14,18 @@ using System.Windows.Media;
 
 namespace JMWToolkit.MVVM.Controls;
 
-enum ResizeDirection
-{
-    Resize_E,
-    Resize_N,
-    Resize_NE,
-    Resize_NW,
-    Resize_S,
-    Resize_SW,
-    Resize_SE,
-    Resize_W
-}
-
 /// <summary>
 /// Descendent of the System.Windows.Window class which adds a customizable toolbar and events to help the ViewModels.
 /// </summary>
 public class MoveableWindow : Window
 {
     private static IntPtr _currentMonitor;
-    private Border? _mainBorder;
     private ContentControl? _moveControl;
     private bool _isMoving = false;
     private Point _moveStartPoint;
     private DateTime _mouseLeftButtonDownTime = default;
     private readonly TimeSpan _mouseDoubleClickTime;
     private MoveableWindowViewModel? _viewModel = null;
-
 
     /// <summary>
     /// Initializes the MoveableWindowClass
@@ -64,9 +49,10 @@ public class MoveableWindow : Window
         Loaded += MoveableWindow_Loaded;
         LocationChanged += MoveableWindow_LocationChanged;
         SetValue(CloseCommandPropertyKey, new RelayCommand(() => Close(), () => Closeable));
-        SetValue(MinimizeCommandPropertyKey,  new RelayCommand(() => WindowState = WindowState.Minimized, () => WindowState != WindowState.Minimized));
-        SetValue(MaximizeCommandPropertyKey, new RelayCommand(() => WindowState = WindowState.Maximized, () => WindowState != WindowState.Maximized));
-        SetValue(OverlapCommandPropertyKey, new RelayCommand(() => WindowState = WindowState.Normal, () => WindowState == WindowState.Maximized));
+
+        SetValue(MinimizeCommandPropertyKey,  new RelayCommand(() => WindowState = WindowState.Minimized, () => WindowState != WindowState.Minimized && ResizeMode != ResizeMode.NoResize));
+        SetValue(MaximizeCommandPropertyKey, new RelayCommand(() => WindowState = WindowState.Maximized, () => WindowState != WindowState.Maximized && (ResizeMode == ResizeMode.CanResize || ResizeMode == ResizeMode.CanResizeWithGrip)));
+        SetValue(OverlapCommandPropertyKey, new RelayCommand(() => WindowState = WindowState.Normal, () => WindowState == WindowState.Maximized && (ResizeMode == ResizeMode.CanResize || ResizeMode == ResizeMode.CanResizeWithGrip)));
 
         _mouseDoubleClickTime = TimeSpan.FromMilliseconds(NativeHelpers.GetDoubleClickTime());
     }
@@ -77,8 +63,24 @@ public class MoveableWindow : Window
     /// <param name="e"></param>
     protected override void OnStateChanged(EventArgs e)
     {
-        (MaximizeCommand as IRelayCommand)?.NotifyCanExecuteChanged();
-        (OverlapCommand as IRelayCommand)?.NotifyCanExecuteChanged();
+        MaximizeCommand?.NotifyCanExecuteChanged();
+        OverlapCommand?.NotifyCanExecuteChanged();
+    }
+
+    /// <summary>
+    /// Invoked whenever the effective value of any dependency property on this DependencyObject has been updated
+    /// </summary>
+    /// <param name="e"></param>
+    protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+    {
+        base.OnPropertyChanged(e);
+
+        if (e.Property.Name == "ResizeMode")
+        {
+            MinimizeCommand?.NotifyCanExecuteChanged();
+            MaximizeCommand?.NotifyCanExecuteChanged();
+            OverlapCommand?.NotifyCanExecuteChanged();
+        }
     }
 
     private void SetMaxHeight()
@@ -88,20 +90,6 @@ public class MoveableWindow : Window
         info.MonitorRect.Left = 10;
 
         _ = NativeHelpers.GetMonitorInfo(_currentMonitor, out info);
-
-        if (_mainBorder != null)
-        {
-            // JMW - We need to account for both the width of the border and the border frame for a non-resizable
-            // window. When maximized DWM will position the Window so those are accounted for and off the screen.
-            var frameWidth = NativeHelpers.GetSystemMetrics(NativeHelpers.SM_CXBORDER);
-            var frameHeight = NativeHelpers.GetSystemMetrics(NativeHelpers.SM_CYBORDER);
-
-            var resizeWidth = NativeHelpers.GetSystemMetrics(NativeHelpers.SM_CXFIXEDFRAME);
-            var resizeHeight = NativeHelpers.GetSystemMetrics(NativeHelpers.SM_CYFIXEDFRAME);
-
-            MaxHeight = info.WorkRect.Bottom - info.WorkRect.Top + 2 * resizeHeight + 2 * frameHeight;
-            MaxWidth = info.WorkRect.Right - info.WorkRect.Left + 2 * resizeWidth + 2 * frameWidth;
-        }
     }
 
     private void MoveableWindow_LocationChanged(object? sender, EventArgs e)
@@ -118,16 +106,7 @@ public class MoveableWindow : Window
 
     private readonly Dictionary<string, FrameworkElement?> _neededElements = new()
     {
-        {"MainBorder", null },
         {"MoveControl", null },
-        {"Resize_NW", null },
-        {"Resize_NE", null },
-        {"Resize_SE", null },
-        {"Resize_SW", null },
-        {"Resize_E", null },
-        {"Resize_W", null },
-        {"Resize_N", null },
-        {"Resize_S", null },
     };
 
     private void EnumerateNamedVisualChildren(FrameworkElement root)
@@ -167,18 +146,10 @@ public class MoveableWindow : Window
     {
         EnumerateNamedVisualChildren(this);
 
-        _mainBorder = _neededElements["MainBorder"] as Border;
-        if (_mainBorder == null)
-        {
-            throw new InvalidOperationException("MainBorder was not found, invalid MoveableWindowBaseStyle");
-        }
-
-        _mainBorder.SizeChanged += MainBorder_SizeChanged;
-
         _moveControl = _neededElements["MoveControl"] as ContentControl;
         if (_moveControl == null)
         {
-            throw new InvalidOperationException("_moveControl was not found, invalid MoveableWindowBaseStyle");
+            throw new InvalidOperationException("MoveControl was not found, invalid MoveableWindowBaseStyle");
         }
 
         // Register for the events we need on the move control
@@ -186,24 +157,6 @@ public class MoveableWindow : Window
         _moveControl.MouseLeftButtonDown += MoveControl_MouseLeftButtonDown;
         _moveControl.MouseLeftButtonUp += MoveControl_MouseLeftButtonUp;
         _moveControl.MouseDoubleClick += MoveControl_MouseDoubleClick;
-
-        // Now also find the resize borders and register for their events also.
-        foreach (var (k, v) in _neededElements.Where(kvp => kvp.Key.StartsWith("Resize_", StringComparison.InvariantCultureIgnoreCase)))
-        {
-            if (v != null)
-            {
-                v.MouseLeftButtonDown += ResizeBorder_OnMouseLeftButtonDown;
-                v.MouseLeftButtonUp += ResizeBorder_OnMouseLeftButtonUp;
-                v.MouseMove += ResizeBorder_OnMouseMove;
-            }
-        }
-
-        var monitor = NativeHelpers.MonitorFromWindow(new WindowInteropHelper(this).EnsureHandle(), NativeHelpers.MONITOR_DEFAULTTONEAREST);
-        if (monitor != _currentMonitor)
-        {
-            _currentMonitor = monitor;
-            SetMaxHeight();
-        }
 
         if (DataContext is MoveableWindowViewModel w)
         {
@@ -221,24 +174,12 @@ public class MoveableWindow : Window
 
             case "Closeable":
                 {
-                    if (DataContext is MoveableWindowViewModel w)
+                    if (_viewModel != null)
                     {
-                        Closeable = w.Closeable;
-                        CloseCommand?.NotifyCanExecuteChanged();
-
+                        Closeable = _viewModel.Closeable;
                     }
-                }
-                break;
 
-            case "Resizable":
-                {
-                    if (DataContext is MoveableWindowViewModel w)
-                    {
-                        Resizable = w.Resizable;
-                        MinimizeCommand?.NotifyCanExecuteChanged();
-                        MaximizeCommand?.NotifyCanExecuteChanged();
-                        OverlapCommand?.NotifyCanExecuteChanged();
-                    }
+                    CloseCommand?.NotifyCanExecuteChanged();
                 }
                 break;
         }
@@ -308,10 +249,6 @@ public class MoveableWindow : Window
             Left += (position.X - _moveStartPoint.X);
             Top += (position.Y - _moveStartPoint.Y);
         }
-    }
-
-    private void MainBorder_SizeChanged(object sender, SizeChangedEventArgs e)
-    {
     }
 
     #region DependencyProperties
@@ -401,185 +338,5 @@ public class MoveableWindow : Window
     /// </summary>
     internal static readonly DependencyPropertyKey OverlapCommandPropertyKey =
         DependencyProperty.RegisterReadOnly("OverlapCommand", typeof(IRelayCommand), typeof(MoveableWindow), new FrameworkPropertyMetadata());
-    #endregion
-
-    #region WindowResizeRegion
-    //
-    // TODO - JMW I really want to switch to using all paths and then have a custom path control that exposes a dependency property
-    // for the Resize direction. That is fit and finish so I won't worry about it right now.
-    //
-    private Point? _sizeStartPos = null;
-    private Point? _lastMousePos = null; 
-    private NativeHelpers.Rect _mainWindowSizeStartRect;
-    private ResizeDirection _sizeResizeDirection = ResizeDirection.Resize_E;
-
-    private void ResizeBorder_OnMouseLeftButtonDown(object _, MouseEventArgs? e)
-    {
-        ArgumentNullException.ThrowIfNull(e);
-        var sender = e.Source as FrameworkElement;
-        ArgumentNullException.ThrowIfNull(sender);
-
-        _sizeResizeDirection = (ResizeDirection)Enum.Parse(typeof(ResizeDirection), sender.Name);
-
-        IntPtr windowHandle =
-           new WindowInteropHelper(this).Handle;
-        if (NativeHelpers.GetWindowRect(windowHandle, ref _mainWindowSizeStartRect))
-        {
-            sender.CaptureMouse();
-            _sizeStartPos = sender.PointToScreen(e.GetPosition(sender));
-        }
-
-        e.Handled = true;
-    }
-
-    private void ResizeBorder_OnMouseLeftButtonUp(object _, MouseEventArgs? e)
-    {
-        ArgumentNullException.ThrowIfNull(e);
-        var sender = e.Source as FrameworkElement;
-        ArgumentNullException.ThrowIfNull(sender);
-        if (_sizeStartPos != null)
-        {
-            sender.ReleaseMouseCapture();
-            _sizeStartPos = null;
-        }
-
-        e.Handled = true;
-    }
-
-    private void ResizeBorder_OnMouseMove(object _, MouseEventArgs? e)
-    {
-        ArgumentNullException.ThrowIfNull(e);
-
-        if (_sizeStartPos != null)
-        {
-            var sender = e.Source as FrameworkElement;
-            ArgumentNullException.ThrowIfNull(sender);
-
-            Point currentPos = sender.PointToScreen(e.GetPosition(sender));
-            if (_lastMousePos != null && currentPos != _lastMousePos) { }
-            double yDiff = currentPos.Y - _sizeStartPos.Value.Y;
-            double xDiff = currentPos.X - _sizeStartPos.Value.X;
-            IntPtr windowHandle =
-                new WindowInteropHelper(this).Handle;
-
-            NativeHelpers.Rect newRect = _mainWindowSizeStartRect;
-
-            switch (_sizeResizeDirection)
-            {
-                case ResizeDirection.Resize_N:
-                    if (yDiff != 0)
-                    {
-                        newRect.Top += (int)yDiff;
-                        NativeHelpers.SetWindowPos(windowHandle, newRect);
-                    }
-
-                    break;
-
-                case ResizeDirection.Resize_S:
-                    if (yDiff != 0)
-                    {
-                        newRect.Bottom += (int)yDiff;
-                        NativeHelpers.SetWindowPos(windowHandle, newRect, NativeHelpers.SWP_NOMOVE);
-                    }
-                    break;
-
-                case ResizeDirection.Resize_W:
-                    Debug.WriteLine($"XDiff = {xDiff}, CX = {newRect.Right - newRect.Left + 1}");
-                    if (xDiff != 0)
-                    {
-                        newRect.Left += (int)xDiff;
-                        Debug.WriteLine($"NewRect Left = {newRect.Left}, Cx = {newRect.Right - newRect.Left + 1}");
-                        NativeHelpers.SetWindowPos(windowHandle, newRect);
-                    }
-                    break;
-
-                case ResizeDirection.Resize_E:
-                    if (xDiff != 0)
-                    {
-                        newRect.Right += (int)xDiff;
-                        NativeHelpers.SetWindowPos(windowHandle, newRect, NativeHelpers.SWP_NOMOVE);
-                    }
-                    break;
-
-                case ResizeDirection.Resize_NW:
-                    if (xDiff == 0)
-                    {
-                        goto case ResizeDirection.Resize_N;
-                    }
-
-                    if (yDiff == 0)
-                    {
-                        goto case ResizeDirection.Resize_W;
-                    }
-
-                    // Otherwise we are moving in both directions. Do a SetWindowPos so we only move once.
-                    {
-                        newRect.Left += (int)xDiff;
-                        newRect.Top += (int)yDiff;
-                        NativeHelpers.SetWindowPos(windowHandle, newRect);
-                    }
-                    break;
-
-                case ResizeDirection.Resize_SW:
-                    if (xDiff == 0)
-                    {
-                        goto case ResizeDirection.Resize_S;
-                    }
-
-                    if (yDiff == 0)
-                    {
-                        goto case ResizeDirection.Resize_W;
-                    }
-
-                    {
-                        newRect.Left += (int)xDiff;
-                        newRect.Bottom += (int)yDiff;
-                        NativeHelpers.SetWindowPos(windowHandle, newRect);
-                    }
-
-                    break;
-
-                case ResizeDirection.Resize_NE:
-                    if (xDiff == 0)
-                    {
-                        goto case ResizeDirection.Resize_N;
-                    }
-
-                    if (yDiff == 0)
-                    {
-                        goto case ResizeDirection.Resize_E;
-                    }
-
-                    {
-                        newRect.Right += (int)xDiff;
-                        newRect.Top += (int)yDiff;
-                        NativeHelpers.SetWindowPos(windowHandle, newRect);
-                    }
-
-                    break;
-
-                case ResizeDirection.Resize_SE:
-                    if (xDiff == 0)
-                    {
-                        goto case ResizeDirection.Resize_N;
-                    }
-
-                    if (yDiff == 0)
-                    {
-                        goto case ResizeDirection.Resize_E;
-                    }
-
-                    {
-                        newRect.Right += (int)xDiff;
-                        newRect.Bottom += (int)yDiff;
-                        NativeHelpers.SetWindowPos(windowHandle, newRect, NativeHelpers.SWP_NOMOVE);
-                    }
-
-                    break;
-            }
-        }
-
-        e.Handled = true;
-    }
     #endregion
 }
