@@ -1,4 +1,11 @@
-﻿using System.Collections.Generic;
+﻿/*
+ * Copyright (c) 2023, J.M. Wiley
+All rights reserved.
+
+This source code is licensed under the BSD-style license found in the
+LICENSE file in the root directory of this source tree. 
+*/
+using System.Collections.Generic;
 using System.Windows.Documents;
 using System.Windows.Data;
 using System;
@@ -29,6 +36,14 @@ public partial class MultilineTextConverter : IValueConverter
         List<Inline> inlines = new();
         int _inItalics = 0;
         int _inBold = 0;
+
+        if (String.IsNullOrEmpty(value) ||
+            value[0] != '<')
+        {
+            // Assume this is not xml and simply display the text as is.
+            inlines.Add(new Run(value));
+            return inlines;
+        }
 
         try
         {

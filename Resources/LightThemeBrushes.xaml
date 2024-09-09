@@ -1,4 +1,11 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<!--
+ * Copyright (c) 2023, J.M. Wiley
+All rights reserved.
+
+This source code is licensed under the BSD-style license found in the
+LICENSE file in the root directory of this source tree
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
@@ -21,6 +28,7 @@
     <Color x:Key="SurfaceShade1">#d8d9d1</Color>
     <Color x:Key="SurfaceShade2">#b8bab2</Color>
 
+    <!-- Colors for the Main Window -->
     <SolidColorBrush x:Key="MoveableWindow.TitleForeground" Color="{DynamicResource Primary}"/>
     <SolidColorBrush x:Key="MoveableWindow.TitleDisabledForeground" Color="{DynamicResource PrimaryTint4}"/>
     <SolidColorBrush x:Key="MoveableWindow.Background" Color="{DynamicResource Surface}"/>
@@ -28,6 +36,7 @@
     <SolidColorBrush x:Key="MoveableWindow.TitleBackground" Color="{DynamicResource SurfaceShade1}"/>
     <SolidColorBrush x:Key="MoveableWindow.BorderBrush" Color="{DynamicResource Primary}"/>
 
+    <!-- Colors for the RoundedCornerButtons -->
     <Color x:Key="RoundedCornerButton.Background">#416835</Color>
     <Color x:Key="RoundedCornerButton.Background.MouseOver">#537648</Color>
     <Color x:Key="RoundedCornerButton.Background.Pressed">#65855b</Color>
@@ -39,7 +48,6 @@
     <Color x:Key="RoundedCornerButton.MouseOverLightBorder">#89a282</Color>
     <Color x:Key="RoundedCornerButton.MouseOverDarkBorder">#65855b</Color>
     <Color x:Key="RoundedCornerButton.DefaultBorderColor">#5C3568</Color>
-
     <SolidColorBrush x:Key="RoundedCornerButton.Background.Brush" Color="{DynamicResource RoundedCornerButton.Background}"/>
     <SolidColorBrush x:Key="RoundedCornerButton.Background.MouseOver.Brush" Color="{DynamicResource RoundedCornerButton.Background.MouseOver}"/>
     <SolidColorBrush x:Key="RoundedCornerButton.Background.Pressed.Brush" Color="{DynamicResource RoundedCornerButton.Background.Pressed}"/>
@@ -50,5 +58,21 @@
     <SolidColorBrush x:Key="RoundedCornerButton.DarkBorder.Brush" Color="{DynamicResource RoundedCornerButton.LightBorder}"/>
     <SolidColorBrush x:Key="RoundedCornerButton.MouseOverLightBorder.Brush" Color="{DynamicResource PrimaryTint4}"/>
     <SolidColorBrush x:Key="RoundedCornerButton.MouseOverDarkBorder.Brush" Color="{DynamicResource PrimaryTint2}"/>
+
+    <!-- Colors for the CustomTextBox -->
+    <Color x:Key="CustomTextBox.Background">#DFE4D7</Color>
+    <Color x:Key="CustomTextBox.Background.Disabled">#c2c6bb</Color>
+    <Color x:Key="CustomTextBox.Foreground">#416835</Color>
+    <Color x:Key="CustomTextBox.Foreground.Disabled">#416835</Color>
+    <Color x:Key="CustomTextBox.Border">#537648</Color>
+    <Color x:Key="CustomTextBox.Border.Disabled">#65855b</Color>
+    <Color x:Key="CustomTextBox.Border.HighlightColor">#194a4c</Color>
+    <Color x:Key="CustomTextBox.PlaceholderTextForeground">#77936f</Color>
+    <SolidColorBrush x:Key="CustomTextBox.Background.Brush" Color="{DynamicResource CustomTextBox.Background}"/>
+    <SolidColorBrush x:Key="CustomTextBox.Foreground.Brush" Color="{DynamicResource CustomTextBox.Foreground}"/>
+    <SolidColorBrush x:Key="CustomTextBox.Foreground.Disabled.Brush" Color="{DynamicResource CustomTextBox.Foreground.Disabled}"/>
+    <SolidColorBrush x:Key="CustomTextBox.Border.Brush" Color="{DynamicResource CustomTextBox.Border}"/>
+    <SolidColorBrush x:Key="CustomTextBox.PlaceholderTextForeground.Brush" Color="{DynamicResource CustomTextBox.PlaceholderTextForeground}"/>
+
 
 </ResourceDictionary>

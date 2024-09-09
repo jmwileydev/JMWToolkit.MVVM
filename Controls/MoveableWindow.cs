@@ -1,13 +1,23 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿/*
+ * Copyright (c) 2023, J.M. Wiley
+All rights reserved.
+
+This source code is licensed under the BSD-style license found in the
+LICENSE file in the root directory of this source tree. 
+*/
+using CommunityToolkit.Mvvm.Input;
 using JMWToolkit.MVVM.Helpers;
 using JMWToolkit.MVVM.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace JMWToolkit.MVVM.Controls;
 
@@ -118,6 +128,20 @@ public class MoveableWindow : Window
     /// <exception cref="InvalidOperationException"></exception>
     protected virtual void MoveableWindow_Loaded(object sender, RoutedEventArgs e)
     {
+        try
+        {
+            IntPtr iconHandle = NativeHelpers.ExtractIcon(Process.GetCurrentProcess().Handle, System.Environment.ProcessPath!, 0);
+            if (iconHandle != IntPtr.Zero)
+            {
+                Icon = Imaging.CreateBitmapSourceFromHIcon(iconHandle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                NativeHelpers.DestroyIcon(iconHandle);
+            }
+        }
+        catch
+        {
+            // Simply ignore errors when trying to extract the application icon
+        }
+
         EnumerateNamedVisualChildren(this);
 
         _moveControl = _neededElements["MoveControl"] as ContentControl;

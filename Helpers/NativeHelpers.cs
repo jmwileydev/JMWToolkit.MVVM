@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2023, J.M. Wiley
+All rights reserved.
+
+This source code is licensed under the BSD-style license found in the
+LICENSE file in the root directory of this source tree. 
+*/
+using System;
 using System.Runtime.InteropServices;
 
 namespace JMWToolkit.MVVM.Helpers;
@@ -176,4 +183,10 @@ internal static partial class NativeHelpers
     internal static Int32 SM_CARETBLINKINGENABLED = 0x2002;
     internal static Int32 SM_CONVERTIBLESLATEMODE = 0x2003;
     internal static Int32 SM_SYSTEMDOCKED = 0x2004;
+
+    [DllImport("Shell32.dll")]
+    internal static extern IntPtr ExtractIcon(IntPtr hInst, string lpszExeFileName, int nIconIndex);
+
+    [DllImport("user32.dll")]
+    internal static extern bool DestroyIcon(IntPtr hIcon);
 }

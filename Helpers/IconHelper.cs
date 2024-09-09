@@ -11,6 +11,7 @@ Thanks to Christian Moser for the code in the article.
 */
 using System;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Windows;
 using System.Windows.Interop;
 
@@ -61,5 +62,4 @@ public static partial class IconHelper
         SetWindowPos(hwnd, IntPtr.Zero, 0, 0, 0, 0, SWP_NOMOVE |
               SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
     }
-
 }
