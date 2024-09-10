@@ -7,22 +7,20 @@ LICENSE file in the root directory of this source tree.
 */
 using CommunityToolkit.Mvvm.Input;
 using System;
-using System.Drawing;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Interop;
-using System.Windows.Media.Imaging;
+using System.Windows.Media;
 using Image = System.Windows.Controls.Image;
 
 namespace JMWToolkit.MVVM.ViewModels;
 
 internal class MessageBoxExViewModel : MoveableWindowViewModel
-{
+{ 
     internal MessageBoxExViewModel(
         String caption,
         string title,
         MessageBoxButton button = MessageBoxButton.OK,
-        MessageBoxImage image = MessageBoxImage.Information)
+        ImageSource? imageSource = null)
     {
         Title = title;
         if (caption != null)
@@ -30,32 +28,7 @@ internal class MessageBoxExViewModel : MoveableWindowViewModel
             Caption = caption;
         }
         MessageBoxButton = button;
-
-        Icon? icon = null;
-
-        switch (image)
-        {
-            case MessageBoxImage.Information:
-                icon = SystemIcons.Information;
-                break;
-
-            case MessageBoxImage.Warning:
-                icon = SystemIcons.Warning;
-                break;
-
-            case MessageBoxImage.Error:
-                icon = SystemIcons.Error;
-                break;
-
-            case MessageBoxImage.Question:
-                icon = SystemIcons.Question;
-                break;
-        }
-
-        if (icon != null)
-        {
-            Image.Source = Imaging.CreateBitmapSourceFromHIcon(icon.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-        }
+        ImageSource = imageSource;
 
         ButtonClickedCommand = new RelayCommand<MessageBoxExeCommandArgs>(
             (args) =>
@@ -74,7 +47,7 @@ internal class MessageBoxExViewModel : MoveableWindowViewModel
 
     private MessageBoxButton MessageBoxButton { get; set; }
 
-    public Image Image { get; private set; } = new Image();
+    public ImageSource? ImageSource { get; private set; }
 
     public bool OkButtonVisible { get => MessageBoxButton == MessageBoxButton.OK || MessageBoxButton == MessageBoxButton.OKCancel; }
 

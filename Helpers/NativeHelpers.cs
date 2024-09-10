@@ -7,8 +7,20 @@ LICENSE file in the root directory of this source tree.
 */
 using System;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace JMWToolkit.MVVM.Helpers;
+
+internal enum SystemIcon
+{
+    IDI_APPLICATIN = 32512,
+    IDI_ERROR = 32513,
+    IDI_QUESTION = 32514,
+    IDI_WARNING = 32515,
+    IDI_INFORMATION = 32516,
+    IDI_WINLOGO = 32517,
+    IDI_SHIELD = 32518,
+}
 
 /// <summary>
 /// A set of Win32 helpers
@@ -189,4 +201,13 @@ internal static partial class NativeHelpers
 
     [DllImport("user32.dll")]
     internal static extern bool DestroyIcon(IntPtr hIcon);
+
+    [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+    static extern IntPtr LoadImage(IntPtr hinst, IntPtr id, uint uType, int cxDesired, int cyDesired, uint fuLoad);
+
+    internal static IntPtr LoadSystemIcon(SystemIcon systemIcon)
+    {
+        IntPtr iconId = new IntPtr((int)systemIcon);
+        return LoadImage(IntPtr.Zero, iconId, 1, 0, 0, 0x8040);
+    }
 }

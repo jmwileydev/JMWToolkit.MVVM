@@ -4,6 +4,9 @@ using System.Windows.Media;
 
 namespace JMWToolkit.MVVM.Controls;
 
+/// <summary>
+/// CustomTextBox is a TextBox that allows a corner radius and placeholder text.
+/// </summary>
 public class CustomTextBox : TextBox
 {
     /// <summary>

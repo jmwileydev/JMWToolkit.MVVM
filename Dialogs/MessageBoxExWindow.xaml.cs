@@ -6,10 +6,8 @@ This source code is licensed under the BSD-style license found in the
 LICENSE file in the root directory of this source tree. 
 */
 using JMWToolkit.MVVM.Controls;
-using JMWToolkit.MVVM.Helpers;
 using JMWToolkit.MVVM.ViewModels;
 using System;
-using System.Windows;
 
 namespace JMWToolkit.MVVM.Dialogs;
 
@@ -27,6 +25,6 @@ internal partial class MessageBoxExWindow : MoveableWindow
 
     protected override void OnSourceInitialized(EventArgs e)
     {
-        IconHelper.RemoveIcon(this);
+        //IconHelper.RemoveIcon(this);
     }
 }

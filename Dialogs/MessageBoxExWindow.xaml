@@ -12,10 +12,12 @@ LICENSE file in the root directory of this source tree
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JMWToolkit.MVVM.Dialogs"
+        xmlns:viewmodels="clr-namespace:JMWToolkit.MVVM.ViewModels"
         xmlns:controls="clr-namespace:JMWToolkit.MVVM.Controls"
         xmlns:vc="clr-namespace:JMWToolkit.MVVM.ValueConverters"
         xmlns:ext="clr-namespace:JMWToolkit.MVVM.Extensions"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type={x:Type viewmodels:MessageBoxExViewModel}}"
         Title="{Binding Title}"
         d:Title="My Window Title"
         SizeToContent="WidthAndHeight"
@@ -52,7 +54,7 @@ LICENSE file in the root directory of this source tree
             </Grid.ColumnDefinitions>
             <Image Width="auto" Stretch="None" Height="auto" Margin="25,10,0,10"
                    d:Source="C:\Users\jmwil\source\repos\jmwileydev\JMWToolkit.MVVM\Dialogs\alert-custom.png"
-                   Source="{Binding Image.Source}"/>
+                   Source="{Binding ImageSource}"/>
             <TextBlock  VerticalAlignment="Center" Grid.Column="1" Margin="10,10,20,10"
                         d:Text="Here is a caption"
                         TextWrapping="Wrap"
