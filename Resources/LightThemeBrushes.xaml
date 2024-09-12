@@ -33,6 +33,7 @@ LICENSE file in the root directory of this source tree
     <SolidColorBrush x:Key="MoveableWindow.TitleDisabledForeground" Color="{DynamicResource PrimaryTint4}"/>
     <SolidColorBrush x:Key="MoveableWindow.Background" Color="{DynamicResource Surface}"/>
     <SolidColorBrush x:Key="MoveableWindow.Foreground" Color="{DynamicResource Primary}"/>
+    <SolidColorBrush x:Key="MoveableWindow.Foreground.Disabled" Color="{DynamicResource PrimaryTint4}"/>
     <SolidColorBrush x:Key="MoveableWindow.TitleBackground" Color="{DynamicResource SurfaceShade1}"/>
     <SolidColorBrush x:Key="MoveableWindow.BorderBrush" Color="{DynamicResource Primary}"/>
 

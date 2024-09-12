@@ -6,6 +6,7 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
+        <Setter Property="PlaceholderTextBrush" Value="{DynamicResource CustomTextBox.PlaceholderTextForeground.Brush}"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="MinWidth" Value="120" />
         <Setter Property="MinHeight" Value="20" />
@@ -66,7 +67,11 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+                        <Grid>
+                            <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+                            <TextBlock Margin="4,0" x:Name="PlaceholderText" Foreground="{TemplateBinding PlaceholderTextBrush}" Text="{TemplateBinding PlaceholderText}" 
+                                       VerticalAlignment="Center" IsEnabled="False"/>
+                        </Grid>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
