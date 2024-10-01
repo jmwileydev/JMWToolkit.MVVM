@@ -5,11 +5,11 @@ All rights reserved.
 This source code is licensed under the BSD-style license found in the
 LICENSE file in the root directory of this source tree. 
 */
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace JMWToolkit.MVVM.ViewModels;
@@ -20,24 +20,19 @@ namespace JMWToolkit.MVVM.ViewModels;
 /// methods take an optional list of properties that will cause the NotifyCanExecuteChanged
 /// method to be called.
 /// </summary>
-public class ViewModelBase : INotifyPropertyChanged
+public class ViewModelBase : ObservableObject
 {
     private readonly Dictionary<string, List<IRelayCommand>> _propertiesToCommands = new();
 
     /// <summary>
-    /// PropertyChanged event which will be called whenever OnPropertyChanged is called.
+    /// Override the base OnPropertyChanged so that we can Notify the affected commands
     /// </summary>
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    /// <summary>
-    /// Methods derived classes should call when a property value is changed to notify clients.
-    /// </summary>
-    /// <param name="propertyName"></param>
-    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    /// <param name="e"></param>
+    protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        base.OnPropertyChanged(e);
 
-        if (propertyName != null && _propertiesToCommands.TryGetValue(propertyName, out List<IRelayCommand>? commands))
+        if (e.PropertyName != null && _propertiesToCommands.TryGetValue(e.PropertyName, out List<IRelayCommand>? commands))
         {
             foreach (var command in commands)
             {

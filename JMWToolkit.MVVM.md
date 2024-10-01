@@ -19,6 +19,12 @@
   - [AddNewItemCommandParameter](#P-JMWToolkit-MVVM-Controls-ComboBoxWithAdd-AddNewItemCommandParameter 'JMWToolkit.MVVM.Controls.ComboBoxWithAdd.AddNewItemCommandParameter')
   - [AddNewItemContent](#P-JMWToolkit-MVVM-Controls-ComboBoxWithAdd-AddNewItemContent 'JMWToolkit.MVVM.Controls.ComboBoxWithAdd.AddNewItemContent')
   - [#cctor()](#M-JMWToolkit-MVVM-Controls-ComboBoxWithAdd-#cctor 'JMWToolkit.MVVM.Controls.ComboBoxWithAdd.#cctor')
+- [GeneratedInternalTypeHelper](#T-XamlGeneratedNamespace-GeneratedInternalTypeHelper 'XamlGeneratedNamespace.GeneratedInternalTypeHelper')
+  - [AddEventHandler()](#M-XamlGeneratedNamespace-GeneratedInternalTypeHelper-AddEventHandler-System-Reflection-EventInfo,System-Object,System-Delegate- 'XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)')
+  - [CreateDelegate()](#M-XamlGeneratedNamespace-GeneratedInternalTypeHelper-CreateDelegate-System-Type,System-Object,System-String- 'XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)')
+  - [CreateInstance()](#M-XamlGeneratedNamespace-GeneratedInternalTypeHelper-CreateInstance-System-Type,System-Globalization-CultureInfo- 'XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)')
+  - [GetPropertyValue()](#M-XamlGeneratedNamespace-GeneratedInternalTypeHelper-GetPropertyValue-System-Reflection-PropertyInfo,System-Object,System-Globalization-CultureInfo- 'XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)')
+  - [SetPropertyValue()](#M-XamlGeneratedNamespace-GeneratedInternalTypeHelper-SetPropertyValue-System-Reflection-PropertyInfo,System-Object,System-Object,System-Globalization-CultureInfo- 'XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)')
 - [IconHelper](#T-JMWToolkit-MVVM-Helpers-IconHelper 'JMWToolkit.MVVM.Helpers.IconHelper')
   - [RemoveIcon(window)](#M-JMWToolkit-MVVM-Helpers-IconHelper-RemoveIcon-System-Windows-Window- 'JMWToolkit.MVVM.Helpers.IconHelper.RemoveIcon(System.Windows.Window)')
 - [MessageBoxEx](#T-JMWToolkit-MVVM-Dialogs-MessageBoxEx 'JMWToolkit.MVVM.Dialogs.MessageBoxEx')
@@ -51,7 +57,15 @@
   - [CreateAsyncRelayCommand\`\`1(execute,canExecute,properties)](#M-JMWToolkit-MVVM-ViewModels-ViewModelBase-CreateAsyncRelayCommand``1-System-Func{``0,System-Threading-Tasks-Task},System-Predicate{``0},System-String[]- 'JMWToolkit.MVVM.ViewModels.ViewModelBase.CreateAsyncRelayCommand``1(System.Func{``0,System.Threading.Tasks.Task},System.Predicate{``0},System.String[])')
   - [CreateRelayCommand(execute,canExecute,properties)](#M-JMWToolkit-MVVM-ViewModels-ViewModelBase-CreateRelayCommand-System-Action,System-Func{System-Boolean},System-String[]- 'JMWToolkit.MVVM.ViewModels.ViewModelBase.CreateRelayCommand(System.Action,System.Func{System.Boolean},System.String[])')
   - [CreateRelayCommand\`\`1(execute,canExecute,properties)](#M-JMWToolkit-MVVM-ViewModels-ViewModelBase-CreateRelayCommand``1-System-Action{``0},System-Predicate{``0},System-String[]- 'JMWToolkit.MVVM.ViewModels.ViewModelBase.CreateRelayCommand``1(System.Action{``0},System.Predicate{``0},System.String[])')
-  - [OnPropertyChanged(propertyName)](#M-JMWToolkit-MVVM-ViewModels-ViewModelBase-OnPropertyChanged-System-String- 'JMWToolkit.MVVM.ViewModels.ViewModelBase.OnPropertyChanged(System.String)')
+  - [OnPropertyChanged(e)](#M-JMWToolkit-MVVM-ViewModels-ViewModelBase-OnPropertyChanged-System-ComponentModel-PropertyChangedEventArgs- 'JMWToolkit.MVVM.ViewModels.ViewModelBase.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)')
+- [ViewModelBaseWithErrors](#T-JMWToolkit-MVVM-ViewModels-ViewModelBaseWithErrors 'JMWToolkit.MVVM.ViewModels.ViewModelBaseWithErrors')
+  - [HasErrors](#P-JMWToolkit-MVVM-ViewModels-ViewModelBaseWithErrors-HasErrors 'JMWToolkit.MVVM.ViewModels.ViewModelBaseWithErrors.HasErrors')
+  - [AddError(propertyName,error)](#M-JMWToolkit-MVVM-ViewModels-ViewModelBaseWithErrors-AddError-System-String,System-String- 'JMWToolkit.MVVM.ViewModels.ViewModelBaseWithErrors.AddError(System.String,System.String)')
+  - [ClearErrors(propertyName)](#M-JMWToolkit-MVVM-ViewModels-ViewModelBaseWithErrors-ClearErrors-System-String- 'JMWToolkit.MVVM.ViewModels.ViewModelBaseWithErrors.ClearErrors(System.String)')
+  - [ClearErrors(propertyNames)](#M-JMWToolkit-MVVM-ViewModels-ViewModelBaseWithErrors-ClearErrors-System-Collections-Generic-IEnumerable{System-String}- 'JMWToolkit.MVVM.ViewModels.ViewModelBaseWithErrors.ClearErrors(System.Collections.Generic.IEnumerable{System.String})')
+  - [GetErrors(propertyName)](#M-JMWToolkit-MVVM-ViewModels-ViewModelBaseWithErrors-GetErrors-System-String- 'JMWToolkit.MVVM.ViewModels.ViewModelBaseWithErrors.GetErrors(System.String)')
+  - [SetPropertyWithErrors\`\`1(field,newValue,propertyName)](#M-JMWToolkit-MVVM-ViewModels-ViewModelBaseWithErrors-SetPropertyWithErrors``1-``0@,``0,System-String- 'JMWToolkit.MVVM.ViewModels.ViewModelBaseWithErrors.SetPropertyWithErrors``1(``0@,``0,System.String)')
+  - [SetPropertyWithErrors\`\`2(oldValue,newValue,model,callback,propertyName)](#M-JMWToolkit-MVVM-ViewModels-ViewModelBaseWithErrors-SetPropertyWithErrors``2-``1,``1,``0,System-Action{``0,``1},System-String- 'JMWToolkit.MVVM.ViewModels.ViewModelBaseWithErrors.SetPropertyWithErrors``2(``1,``1,``0,System.Action{``0,``1},System.String)')
 - [_spacesAndNewLine_0](#T-System-Text-RegularExpressions-Generated-_spacesAndNewLine_0 'System.Text.RegularExpressions.Generated._spacesAndNewLine_0')
   - [#ctor()](#M-System-Text-RegularExpressions-Generated-_spacesAndNewLine_0-#ctor 'System.Text.RegularExpressions.Generated._spacesAndNewLine_0.#ctor')
   - [Instance](#F-System-Text-RegularExpressions-Generated-_spacesAndNewLine_0-Instance 'System.Text.RegularExpressions.Generated._spacesAndNewLine_0.Instance')
@@ -326,8 +340,11 @@ collection of Inline objects for rich formatting of the text.
 
 ##### Summary
 
-This routine is used to convert from a string to an Inline collection. All other types will
-fail.
+Converts the passed in string to a collection of Inline objects.
+
+##### Returns
+
+
 
 ##### Parameters
 
@@ -373,7 +390,13 @@ This method has no parameters.
 
 ##### Remarks
 
-Pattern explanation:
+Pattern:
+
+```
+[ ]*\\n[ ]*
+```
+
+Explanation:
 
 ```
 ○ Match ' ' atomically any number of times.
@@ -689,18 +712,147 @@ A new RelayCommand
 | canExecute | [System.Predicate{\`\`0}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Predicate 'System.Predicate{``0}') | Function to determine if the command should be enabled. |
 | properties | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | List of properties which can cause the result of canExecute to change. |
 
-<a name='M-JMWToolkit-MVVM-ViewModels-ViewModelBase-OnPropertyChanged-System-String-'></a>
-### OnPropertyChanged(propertyName) `method`
+<a name='M-JMWToolkit-MVVM-ViewModels-ViewModelBase-OnPropertyChanged-System-ComponentModel-PropertyChangedEventArgs-'></a>
+### OnPropertyChanged(e) `method`
 
 ##### Summary
 
-Methods derived classes should call when a property value is changed to notify clients.
+Override the base OnPropertyChanged so that we can Notify the affected commands
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| e | [System.ComponentModel.PropertyChangedEventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ComponentModel.PropertyChangedEventArgs 'System.ComponentModel.PropertyChangedEventArgs') |  |
+
+<a name='T-JMWToolkit-MVVM-ViewModels-ViewModelBaseWithErrors'></a>
+## ViewModelBaseWithErrors `type`
+
+##### Namespace
+
+JMWToolkit.MVVM.ViewModels
+
+##### Summary
+
+This is an extension of the ViewModelBase class that adds Error notifications.
+
+<a name='P-JMWToolkit-MVVM-ViewModels-ViewModelBaseWithErrors-HasErrors'></a>
+### HasErrors `property`
+
+##### Summary
+
+Gets a value that indicates whether the entity has validation errors.
+
+<a name='M-JMWToolkit-MVVM-ViewModels-ViewModelBaseWithErrors-AddError-System-String,System-String-'></a>
+### AddError(propertyName,error) `method`
+
+##### Summary
+
+Adds an error for the given property name.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| propertyName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The property name to add the validation error to. |
+| error | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The error |
+
+<a name='M-JMWToolkit-MVVM-ViewModels-ViewModelBaseWithErrors-ClearErrors-System-String-'></a>
+### ClearErrors(propertyName) `method`
+
+##### Summary
+
+Clears the validation errors for the specified property If no property is specified it clears away all
+validation errors.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | propertyName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+
+<a name='M-JMWToolkit-MVVM-ViewModels-ViewModelBaseWithErrors-ClearErrors-System-Collections-Generic-IEnumerable{System-String}-'></a>
+### ClearErrors(propertyNames) `method`
+
+##### Summary
+
+Clears the validation errors for all of the specified properties.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| propertyNames | [System.Collections.Generic.IEnumerable{System.String}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.String}') |  |
+
+<a name='M-JMWToolkit-MVVM-ViewModels-ViewModelBaseWithErrors-GetErrors-System-String-'></a>
+### GetErrors(propertyName) `method`
+
+##### Summary
+
+Gets the validation errors for a specified property or for the entire entity.
+
+##### Returns
+
+The validation errors for the property or entity.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| propertyName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The name of the property to retrieve validation errors for; or null or Empty, to retrieve entity-level errors. |
+
+<a name='M-JMWToolkit-MVVM-ViewModels-ViewModelBaseWithErrors-SetPropertyWithErrors``1-``0@,``0,System-String-'></a>
+### SetPropertyWithErrors\`\`1(field,newValue,propertyName) `method`
+
+##### Summary
+
+Sets the value for the give property. If the value is changed it clears the existing errors for the property.
+
+##### Returns
+
+true if the property was updated, false if not.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| field | [\`\`0@](#T-``0@ '``0@') | The field value to be updated with the new value. |
+| newValue | [\`\`0](#T-``0 '``0') | The new value for the property. |
+| propertyName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The property name. |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | The type of the property specified. |
+
+<a name='M-JMWToolkit-MVVM-ViewModels-ViewModelBaseWithErrors-SetPropertyWithErrors``2-``1,``1,``0,System-Action{``0,``1},System-String-'></a>
+### SetPropertyWithErrors\`\`2(oldValue,newValue,model,callback,propertyName) `method`
+
+##### Summary
+
+Sets the value for the give property. If the value is changed it clears the existing errors for the property.
+
+##### Returns
+
+true if the value is changed, false if not.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| oldValue | [\`\`1](#T-``1 '``1') | The old value to be replaced. |
+| newValue | [\`\`1](#T-``1 '``1') | The new value. |
+| model | [\`\`0](#T-``0 '``0') | The actual model to be updated. |
+| callback | [System.Action{\`\`0,\`\`1}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{``0,``1}') | A callback which will be executed if the values are not equal. |
+| propertyName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The name of the property being updated. |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| TModel | The model class being whose property is being updated. |
+| T | The type of the field in the class. |
 
 <a name='T-System-Text-RegularExpressions-Generated-_spacesAndNewLine_0'></a>
 ## _spacesAndNewLine_0 `type`
