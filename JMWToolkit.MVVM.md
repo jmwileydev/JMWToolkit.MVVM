@@ -3,14 +3,22 @@
 
 ## Contents
 
+- [AppBase](#T-JMWToolkit-MVVM-AppBase 'JMWToolkit.MVVM.AppBase')
+  - [#ctor()](#M-JMWToolkit-MVVM-AppBase-#ctor-System-Action{Microsoft-Extensions-DependencyInjection-IServiceCollection}- 'JMWToolkit.MVVM.AppBase.#ctor(System.Action{Microsoft.Extensions.DependencyInjection.IServiceCollection})')
+  - [AppHost](#P-JMWToolkit-MVVM-AppBase-AppHost 'JMWToolkit.MVVM.AppBase.AppHost')
+  - [GetConfiguredService\`\`1()](#M-JMWToolkit-MVVM-AppBase-GetConfiguredService``1 'JMWToolkit.MVVM.AppBase.GetConfiguredService``1')
+  - [StartAppHost()](#M-JMWToolkit-MVVM-AppBase-StartAppHost 'JMWToolkit.MVVM.AppBase.StartAppHost')
+  - [StopAppHost()](#M-JMWToolkit-MVVM-AppBase-StopAppHost 'JMWToolkit.MVVM.AppBase.StopAppHost')
+- [AppServiceLocator](#T-JMWToolkit-MVVM-AppServiceLocator 'JMWToolkit.MVVM.AppServiceLocator')
+  - [GetConfiguredService\`\`1()](#M-JMWToolkit-MVVM-AppServiceLocator-GetConfiguredService``1 'JMWToolkit.MVVM.AppServiceLocator.GetConfiguredService``1')
 - [ComboBoxWithAdd](#T-JMWToolkit-MVVM-Controls-ComboBoxWithAdd 'JMWToolkit.MVVM.Controls.ComboBoxWithAdd')
-  - [#ctor()](#M-JMWToolkit-MVVM-Controls-ComboBoxWithAdd-#ctor 'JMWToolkit.MVVM.Controls.ComboBoxWithAdd.#ctor')
   - [AddNewItemCommandParameterProperty](#F-JMWToolkit-MVVM-Controls-ComboBoxWithAdd-AddNewItemCommandParameterProperty 'JMWToolkit.MVVM.Controls.ComboBoxWithAdd.AddNewItemCommandParameterProperty')
   - [AddNewItemCommandProperty](#F-JMWToolkit-MVVM-Controls-ComboBoxWithAdd-AddNewItemCommandProperty 'JMWToolkit.MVVM.Controls.ComboBoxWithAdd.AddNewItemCommandProperty')
   - [AddNewItemContentProperty](#F-JMWToolkit-MVVM-Controls-ComboBoxWithAdd-AddNewItemContentProperty 'JMWToolkit.MVVM.Controls.ComboBoxWithAdd.AddNewItemContentProperty')
   - [AddNewItemCommand](#P-JMWToolkit-MVVM-Controls-ComboBoxWithAdd-AddNewItemCommand 'JMWToolkit.MVVM.Controls.ComboBoxWithAdd.AddNewItemCommand')
   - [AddNewItemCommandParameter](#P-JMWToolkit-MVVM-Controls-ComboBoxWithAdd-AddNewItemCommandParameter 'JMWToolkit.MVVM.Controls.ComboBoxWithAdd.AddNewItemCommandParameter')
   - [AddNewItemContent](#P-JMWToolkit-MVVM-Controls-ComboBoxWithAdd-AddNewItemContent 'JMWToolkit.MVVM.Controls.ComboBoxWithAdd.AddNewItemContent')
+  - [#cctor()](#M-JMWToolkit-MVVM-Controls-ComboBoxWithAdd-#cctor 'JMWToolkit.MVVM.Controls.ComboBoxWithAdd.#cctor')
 - [GeneratedInternalTypeHelper](#T-XamlGeneratedNamespace-GeneratedInternalTypeHelper 'XamlGeneratedNamespace.GeneratedInternalTypeHelper')
   - [AddEventHandler()](#M-XamlGeneratedNamespace-GeneratedInternalTypeHelper-AddEventHandler-System-Reflection-EventInfo,System-Object,System-Delegate- 'XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)')
   - [CreateDelegate()](#M-XamlGeneratedNamespace-GeneratedInternalTypeHelper-CreateDelegate-System-Type,System-Object,System-String- 'XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)')
@@ -62,6 +70,110 @@
   - [#ctor()](#M-System-Text-RegularExpressions-Generated-_spacesAndNewLine_0-#ctor 'System.Text.RegularExpressions.Generated._spacesAndNewLine_0.#ctor')
   - [Instance](#F-System-Text-RegularExpressions-Generated-_spacesAndNewLine_0-Instance 'System.Text.RegularExpressions.Generated._spacesAndNewLine_0.Instance')
 
+<a name='T-JMWToolkit-MVVM-AppBase'></a>
+## AppBase `type`
+
+##### Namespace
+
+JMWToolkit.MVVM
+
+##### Summary
+
+This is a helper class for locating ViewModel's that are registered with
+
+<a name='M-JMWToolkit-MVVM-AppBase-#ctor-System-Action{Microsoft-Extensions-DependencyInjection-IServiceCollection}-'></a>
+### #ctor() `constructor`
+
+##### Summary
+
+Constructor for the AppBase will call configure services for dependency injection
+
+##### Parameters
+
+This constructor has no parameters.
+
+<a name='P-JMWToolkit-MVVM-AppBase-AppHost'></a>
+### AppHost `property`
+
+##### Summary
+
+Get the AppHost for the Application
+
+<a name='M-JMWToolkit-MVVM-AppBase-GetConfiguredService``1'></a>
+### GetConfiguredService\`\`1() `method`
+
+##### Summary
+
+Get's a configured service from the AppHost if it was created during construction.
+
+##### Returns
+
+
+
+##### Parameters
+
+This method has no parameters.
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T |  |
+
+<a name='M-JMWToolkit-MVVM-AppBase-StartAppHost'></a>
+### StartAppHost() `method`
+
+##### Summary
+
+If the AppHost has been configured during construction this routine will call StaryAsync.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-JMWToolkit-MVVM-AppBase-StopAppHost'></a>
+### StopAppHost() `method`
+
+##### Summary
+
+If the AppHost has been configured during construction this will call StopAsync.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='T-JMWToolkit-MVVM-AppServiceLocator'></a>
+## AppServiceLocator `type`
+
+##### Namespace
+
+JMWToolkit.MVVM
+
+##### Summary
+
+This class can be used to find a service configured by the app.
+
+<a name='M-JMWToolkit-MVVM-AppServiceLocator-GetConfiguredService``1'></a>
+### GetConfiguredService\`\`1() `method`
+
+##### Summary
+
+Queries the AppHost and returns the configured service
+
+##### Returns
+
+
+
+##### Parameters
+
+This method has no parameters.
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T |  |
+
 <a name='T-JMWToolkit-MVVM-Controls-ComboBoxWithAdd'></a>
 ## ComboBoxWithAdd `type`
 
@@ -73,17 +185,6 @@ JMWToolkit.MVVM.Controls
 
 ComboBoxWithAdd - adds an optional button to the bottom of the ComboBox drop down so that the user can choose to
 add a new item into the list.
-
-<a name='M-JMWToolkit-MVVM-Controls-ComboBoxWithAdd-#ctor'></a>
-### #ctor() `constructor`
-
-##### Summary
-
-Default constructor for the ComboBoxWithAdd
-
-##### Parameters
-
-This constructor has no parameters.
 
 <a name='F-JMWToolkit-MVVM-Controls-ComboBoxWithAdd-AddNewItemCommandParameterProperty'></a>
 ### AddNewItemCommandParameterProperty `constants`
@@ -127,67 +228,12 @@ Parameter to be passed to the AddNewItem Command
 
 The content to be displayed in the AddNewItem button
 
-<a name='T-XamlGeneratedNamespace-GeneratedInternalTypeHelper'></a>
-## GeneratedInternalTypeHelper `type`
-
-##### Namespace
-
-XamlGeneratedNamespace
+<a name='M-JMWToolkit-MVVM-Controls-ComboBoxWithAdd-#cctor'></a>
+### #cctor() `method`
 
 ##### Summary
 
-GeneratedInternalTypeHelper
-
-<a name='M-XamlGeneratedNamespace-GeneratedInternalTypeHelper-AddEventHandler-System-Reflection-EventInfo,System-Object,System-Delegate-'></a>
-### AddEventHandler() `method`
-
-##### Summary
-
-AddEventHandler
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='M-XamlGeneratedNamespace-GeneratedInternalTypeHelper-CreateDelegate-System-Type,System-Object,System-String-'></a>
-### CreateDelegate() `method`
-
-##### Summary
-
-CreateDelegate
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='M-XamlGeneratedNamespace-GeneratedInternalTypeHelper-CreateInstance-System-Type,System-Globalization-CultureInfo-'></a>
-### CreateInstance() `method`
-
-##### Summary
-
-CreateInstance
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='M-XamlGeneratedNamespace-GeneratedInternalTypeHelper-GetPropertyValue-System-Reflection-PropertyInfo,System-Object,System-Globalization-CultureInfo-'></a>
-### GetPropertyValue() `method`
-
-##### Summary
-
-GetPropertyValue
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='M-XamlGeneratedNamespace-GeneratedInternalTypeHelper-SetPropertyValue-System-Reflection-PropertyInfo,System-Object,System-Object,System-Globalization-CultureInfo-'></a>
-### SetPropertyValue() `method`
-
-##### Summary
-
-SetPropertyValue
+Default constructor for the ComboBoxWithAdd
 
 ##### Parameters
 
@@ -294,8 +340,11 @@ collection of Inline objects for rich formatting of the text.
 
 ##### Summary
 
-This routine is used to convert from a string to an Inline collection. All other types will
-fail.
+Converts the passed in string to a collection of Inline objects.
+
+##### Returns
+
+
 
 ##### Parameters
 
