@@ -196,18 +196,18 @@ internal static partial class NativeHelpers
     internal static Int32 SM_CONVERTIBLESLATEMODE = 0x2003;
     internal static Int32 SM_SYSTEMDOCKED = 0x2004;
 
-    [DllImport("Shell32.dll")]
-    internal static extern IntPtr ExtractIcon(IntPtr hInst, string lpszExeFileName, int nIconIndex);
+    [DllImport("Shell32.dll", CharSet = CharSet.Unicode)]
+    internal static extern IntPtr ExtractIcon(IntPtr hInst, string exeFileName, int nIconIndex);
 
     [DllImport("user32.dll")]
     internal static extern bool DestroyIcon(IntPtr hIcon);
 
-    [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-    static extern IntPtr LoadImage(IntPtr hinst, IntPtr id, uint uType, int cxDesired, int cyDesired, uint fuLoad);
+    [DllImport("user32.dll", SetLastError = true)]
+    static extern IntPtr LoadImage(IntPtr hInst, IntPtr id, uint uType, int cxDesired, int cyDesired, uint fuLoad);
 
     internal static IntPtr LoadSystemIcon(SystemIcon systemIcon)
     {
-        IntPtr iconId = new IntPtr((int)systemIcon);
+        IntPtr iconId = new((int)systemIcon);
         return LoadImage(IntPtr.Zero, iconId, 1, 0, 0, 0x8040);
     }
 }
