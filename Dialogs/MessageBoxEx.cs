@@ -21,14 +21,13 @@ namespace JMWToolkit.MVVM.Dialogs;
 
 /// <summary>
 /// Class used to Show a MessageBox dialog that allows formatted text for the caption. This
-/// is very similiar to the built in MessageBox class but with the text enhancements for the
+/// is very similar to the built in MessageBox class but with the text enhancements for the
 /// caption. I will continue to add more features but for now the
 /// Caption area allows you to specify &lt;break&gt; in a line when you want a paragraph break.
 /// </summary>
 public static class MessageBoxEx
 {
-    private static Dictionary<MessageBoxImage, ImageSource?> _messageBoxImages = [];
-    private static object _lock = new();
+    private static readonly Dictionary<MessageBoxImage, ImageSource?> _messageBoxImages = [];
 
     /// <summary>
     /// Show the dialog and return when the user makes one of the choices.
@@ -41,7 +40,7 @@ public static class MessageBoxEx
     /// <param name="buttons">One of the MessageBoxButton values, defaults to MessageBoxButton.OK</param>
     /// <param name="image">
     ///     This is one of the enum values MessageBoxImage.Information, MessageBoxImage.Warning, 
-    ///     MessageBoxImage.Error, or MessageBoxImage.Question defaults to MessageBoxImage.Informormation
+    ///     MessageBoxImage.Error, or MessageBoxImage.Question defaults to MessageBoxImage.Information
     /// </param>
     /// <returns></returns>
     public static MessageBoxResult ShowDialog(String caption, string title, MessageBoxButton buttons = MessageBoxButton.OK, MessageBoxImage image = MessageBoxImage.Information)
@@ -64,29 +63,15 @@ public static class MessageBoxEx
             return null;
         }
 
-        ImageSource? imageSource = null;
-        if (!_messageBoxImages.TryGetValue(messageBoxImage, out imageSource))
+        if (!_messageBoxImages.TryGetValue(messageBoxImage, out var imageSource))
         {
-            SystemIcon icon;
-
-            switch (messageBoxImage)
+            var icon = messageBoxImage switch
             {
-                case MessageBoxImage.Warning:
-                    icon = SystemIcon.IDI_WARNING;
-                    break;
-
-                case MessageBoxImage.Error:
-                    icon = SystemIcon.IDI_ERROR;
-                    break;
-
-                case MessageBoxImage.Question:
-                    icon = SystemIcon.IDI_QUESTION;
-                    break;
-
-                default:
-                    icon = SystemIcon.IDI_INFORMATION;
-                    break;
-            }
+                MessageBoxImage.Warning => SystemIcon.IDI_WARNING,
+                MessageBoxImage.Error => SystemIcon.IDI_ERROR,
+                MessageBoxImage.Question => SystemIcon.IDI_QUESTION,
+                _ => SystemIcon.IDI_INFORMATION,
+            };
 
             IntPtr hIcon = NativeHelpers.LoadSystemIcon(icon);
             imageSource = Imaging.CreateBitmapSourceFromHIcon(hIcon, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());

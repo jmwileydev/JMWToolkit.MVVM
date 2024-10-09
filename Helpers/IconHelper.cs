@@ -21,7 +21,7 @@ namespace JMWToolkit.MVVM.Helpers;
 /// The IconHelper is a static class which exposes a single method to remove the icon from
 /// the window decoration. It is used by MessageBoxEx but can be used on any Window.
 /// </summary>
-public static partial class IconHelper
+internal static partial class IconHelper
 {
     [DllImport("user32.dll")]
     static extern int GetWindowLong(IntPtr hwnd, int index);
@@ -37,13 +37,13 @@ public static partial class IconHelper
     static extern IntPtr SendMessage(IntPtr hwnd, uint msg,
                IntPtr wParam, IntPtr lParam);
 
-    const int GWL_EXSTYLE = -20;
-    const int WS_EX_DLGMODALFRAME = 0x0001;
-    const int SWP_NOSIZE = 0x0001;
-    const int SWP_NOMOVE = 0x0002;
-    const int SWP_NOZORDER = 0x0004;
-    const int SWP_FRAMECHANGED = 0x0020;
-    const uint WM_SETICON = 0x0080;
+    internal const int GWL_EXSTYLE = -20;
+    internal const int WS_EX_DLGMODALFRAME = 0x0001;
+    internal const int SWP_NOSIZE = 0x0001;
+    internal const int SWP_NOMOVE = 0x0002;
+    internal const int SWP_NOZORDER = 0x0004;
+    internal const int SWP_FRAMECHANGED = 0x0020;
+    internal const uint WM_SETICON = 0x0080;
 
     /// <summary>
     /// Removes the Icon from the Window.

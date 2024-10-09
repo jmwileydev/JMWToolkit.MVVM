@@ -33,7 +33,7 @@ public partial class MultilineTextConverter : IValueConverter
         // Trim off leading and trailing whitespace
         value = value.Trim();
 
-        List<Inline> inlines = new();
+        List<Inline> inlines = [];
         int _inItalics = 0;
         int _inBold = 0;
 
@@ -80,7 +80,7 @@ public partial class MultilineTextConverter : IValueConverter
                                 break;
 
                             default:
-                                Debug.WriteLine("MultilineTextConverter: Unrecognized Elemement Type {0}", reader.Name);
+                                Debug.WriteLine("MultilineTextConverter: Unrecognized Element Type {0}", reader.Name);
                                 break;
 
                         }
@@ -133,7 +133,7 @@ public partial class MultilineTextConverter : IValueConverter
                                 break;
 
                             default:
-                                Debug.WriteLine("MultilineTextConverter: Unrecognized EndElemement Type {0}", reader.Name);
+                                Debug.WriteLine("MultilineTextConverter: Unrecognized EndElement Type {0}", reader.Name);
                                 break;
 
                         }
