@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JMWToolkit.MVVM.Interfaces;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,12 +22,15 @@ public class TaskWatcherEventArgs(TaskWatcher taskWatcher) : EventArgs
 /// Runs an asynchronous Action and then calls the OnCompleted method on the UX thread when done. It always observes the
 /// task so that the application will never see an UnobservedTaskException.
 /// </summary>
+/// <param name="dispatcher">The IDispatcher interface to be used.</param>
 /// <param name="action">The action to run.</param>
 /// <param name="cancellationToken">The CancellationToken that will be monitored for a cancellation.</param>
-public class TaskWatcher(Action action, CancellationToken? cancellationToken = null)
+public class TaskWatcher(IDispatcher dispatcher, Action action, CancellationToken? cancellationToken = null)
 {
     private readonly CancellationToken? _cancellationToken = cancellationToken;
     private readonly Action _action = action;
+    private readonly IDispatcher _dispatcher = dispatcher;
+    private readonly Object _monitorObject = new();
 
     private bool _isCompleted = false;
     /// <summary>
@@ -78,14 +82,24 @@ public class TaskWatcher(Action action, CancellationToken? cancellationToken = n
             {
                 _action();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Exception = ex;
             }
 
-            IsCompleted = true;
+            Monitor.Enter(_monitorObject);
 
-            Application.Current.Dispatcher.BeginInvoke(() =>
+            try
+            {
+                IsCompleted = true;
+                Monitor.PulseAll(_monitorObject);
+            }
+            finally
+            { 
+                Monitor.Exit(_monitorObject);
+            }
+
+            _dispatcher.BeginInvoke(() =>
             {
                 OnCompleted?.Invoke(this, new TaskWatcherEventArgs(this));
             });
@@ -93,6 +107,30 @@ public class TaskWatcher(Action action, CancellationToken? cancellationToken = n
         },  _cancellationToken ?? new(), creationOptions);
 
         t.Start();
+    }
+
+    /// <summary>
+    /// Waits for the background task to complete.
+    /// </summary>
+    public void Wait()
+    {
+        Monitor.Enter(_monitorObject);
+
+        try
+        {
+            while (!IsCompleted)
+            {
+                Monitor.Wait(_monitorObject);
+            }
+        }
+        finally
+        {
+            if (Monitor.IsEntered(_monitorObject))
+            {
+                Monitor.Exit(_monitorObject);
+            }
+        }
+        
     }
 }
 
