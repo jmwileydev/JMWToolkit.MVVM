@@ -1,7 +1,14 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="clr-namespace:JMWToolkit.MVVM.Controls">
+                    xmlns:controls="clr-namespace:JMWToolkit.MVVM.Controls"
+                    xmlns:converters="clr-namespace:JMWToolkit.MVVM.Converters">
 
+    <converters:CountToVisibilityArguments x:Key="PlaceholdVisibilityArguments"
+                                           Operator="Equals"
+                                           VisibilityConverterMode="Hidden"/>
+
+    <converters:CountToVisibilityConverter x:Key="CountToVisibilityConverter"/>
+    
     <Style TargetType="{x:Type controls:CustomTextBox}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -69,8 +76,9 @@
                         </VisualStateManager.VisualStateGroups>
                         <Grid>
                             <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
-                            <TextBlock Margin="4,0" x:Name="PlaceholderText" Foreground="{TemplateBinding PlaceholderTextBrush}" Text="{TemplateBinding PlaceholderText}" 
-                                       VerticalAlignment="Center" IsEnabled="False"/>
+                            <TextBlock Margin="4,0" x:Name="PlaceholderText" Foreground="{TemplateBinding PlaceholderTextBrush}" Text="{TemplateBinding PlaceholderText}"
+                                       VerticalAlignment="Center" IsEnabled="False"
+                                       Visibility="{Binding RelativeSource={RelativeSource AncestorType=controls:CustomTextBox}, Path=Text.Length, Converter={StaticResource CountToVisibilityConverter}, ConverterParameter={StaticResource PlaceholdVisibilityArguments}}"/>
                         </Grid>
                     </Border>
                 </ControlTemplate>
