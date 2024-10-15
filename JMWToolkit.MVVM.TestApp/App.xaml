@@ -1,0 +1,15 @@
+﻿<Application x:Class="JMWToolkit.MVVM.TestApp.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:JMWToolkit.MVVM.TestApp"
+             xmlns:controls="clr-namespace:JMWToolkit.MVVM.Controls;assembly=JMWToolkit.MVVM"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/JMWToolkit.MVVM;component/Resources/Resources.xaml"/>
+                <ResourceDictionary Source="Resources/StringResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
