@@ -1,8 +1,5 @@
 ﻿using JMWToolkit.MVVM.Helpers;
 using JMWToolkit.MVVM.Interfaces;
-using System.Threading;
-using System.Windows.Documents;
-using System.Windows.Threading;
 
 namespace JMWToolkit.MVVM.UnitTests;
 
@@ -112,9 +109,6 @@ public sealed class TaskWatcherTests : IDispatcher
     [TestMethod]
     public void TestThatTheTaskWatcherCanBeWaitedOn()
     {
-
-        AsyncLock asyncLock = new(true);
-
         TestContext.WriteLine("Running a task which I will simply wait on.");
 
         DateTime taskFinishTime = DateTime.MinValue;
@@ -136,5 +130,74 @@ public sealed class TaskWatcherTests : IDispatcher
         Assert.IsTrue(taskWatcher.IsCompleted);
         Assert.IsTrue(waitFinishTime > taskFinishTime);
 
+    }
+
+    [TestMethod]
+    public void TestTaskThatSuccessfullyReturnsAValue()
+    {
+        AsyncLock asyncLock = new(true);
+
+        TestContext.WriteLine("Running a task which will succeed and return a value.");
+        Guid returnValue = Guid.NewGuid();
+
+        TaskWatcher<Guid> taskWatcher = new(
+            this,
+            () =>
+            {
+                Thread.Sleep(2000);
+                return returnValue;
+            });
+
+        taskWatcher.OnCompleted += (e, args) =>
+        {
+            TaskWatcher<Guid> taskWatcher = args.TaskWatcher;
+            Assert.IsTrue(taskWatcher.IsCompleted);
+            Assert.AreEqual(returnValue, args.Result);
+            asyncLock.Release();
+        };
+
+        taskWatcher.Start();
+        Assert.IsTrue(asyncLock.Wait(TimeSpan.FromSeconds(5)));
+        Assert.IsTrue(taskWatcher.IsCompleted);
+        Assert.IsFalse(taskWatcher.IsCanceled);
+        Assert.IsFalse(taskWatcher.IsFaulted);
+        Assert.IsNull(taskWatcher.Exception);
+        Assert.IsTrue(taskWatcher.IsCompleted);
+    }
+
+    [TestMethod]
+    public void TestTaskWithInputArgsSuccessfullyReturnsAValue()
+    {
+        AsyncLock asyncLock = new(true);
+
+        TestContext.WriteLine("Running a task which takes input, should succeed and returns a value.");
+        Guid returnValue = Guid.NewGuid();
+        Guid inputArgs = Guid.NewGuid();
+
+        TaskWatcher<Guid, Guid> taskWatcher = new(
+            this,
+            (args) =>
+            {
+                Thread.Sleep(2000);
+                Assert.AreEqual(inputArgs, args);
+                return returnValue;
+            });
+
+        taskWatcher.OnCompleted += (e, args) =>
+        {
+            TaskWatcher<Guid, Guid> taskWatcher = args.TaskWatcher;
+            Assert.IsTrue(taskWatcher.IsCompleted);
+            Assert.AreEqual(returnValue, args.Result);
+            Assert.AreEqual(inputArgs, args.InputArgs);
+            asyncLock.Release();
+        };
+
+        taskWatcher.Start(inputArgs);
+        Assert.IsTrue(asyncLock.Wait(TimeSpan.FromSeconds(5)));
+        Assert.IsTrue(taskWatcher.IsCompleted);
+        Assert.IsFalse(taskWatcher.IsCanceled);
+        Assert.IsFalse(taskWatcher.IsFaulted);
+        Assert.IsNull(taskWatcher.Exception);
+        Assert.IsTrue(taskWatcher.IsCompleted);
     }
 }
