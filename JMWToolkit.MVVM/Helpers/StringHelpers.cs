@@ -12,7 +12,8 @@ namespace JMWToolkit.MVVM.Helpers;
 
 /// <summary>
 /// Static StringHelpers. I am sure this class will grow over time. For now two simple
-/// routines to load a string resource.
+/// routines to load a string resource. I am not thrilled about this class using the
+/// Application.Current.FindResource.
 /// </summary>
 public static class StringResourceHelpers
 {
