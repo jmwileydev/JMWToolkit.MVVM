@@ -1139,7 +1139,8 @@ JMWToolkit.MVVM.Helpers
 ##### Summary
 
 Static StringHelpers. I am sure this class will grow over time. For now two simple
-routines to load a string resource.
+routines to load a string resource. I am not thrilled about this class using the
+Application.Current.FindResource.
 
 <a name='M-JMWToolkit-MVVM-Helpers-StringResourceHelpers-FormatStringResource-System-String,System-Object[]-'></a>
 ### FormatStringResource(formatId,args) `method`
